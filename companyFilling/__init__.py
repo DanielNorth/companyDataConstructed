@@ -29,3 +29,4 @@ def create_app():
     app.register_blueprint(users, url_prefix='/users')
 
     return app
+
