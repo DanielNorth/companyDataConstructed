@@ -20,7 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be971fe9-f6b4-4bdd-8ed0-eeac5a387891" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/companyFilling/fillingForm/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/fillingForm/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/fillingForm/routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/homePage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/templates/homePage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/companyFilling/templates/userPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/users/routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -44,8 +58,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../searchStoreImageToSeeAnySimilarProduct" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -74,6 +89,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605399411760">

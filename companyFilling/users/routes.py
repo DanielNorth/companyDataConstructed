@@ -26,7 +26,7 @@ def registerUser():
     return render_template('register.html', form=form)
 
 
-@users.route('/login/', methods=['GET', "POST"], endpoint='login/')
+@users.route('login/', methods=['GET', "POST"], endpoint='login/')
 def login():
     form = LoginForm()
 
@@ -39,3 +39,4 @@ def login():
             return '<h1>Nothing</h1>'
 
     return render_template('login.html', form=form)
+
