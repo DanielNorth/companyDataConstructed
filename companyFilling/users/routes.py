@@ -34,9 +34,18 @@ def login():
         email = User.query.filter_by(email=form.email.data).first()
         if email:
             if check_password_hash(email.password, form.password.data):
-                return '<h1>' + "Hello " + form.email.data + email.password + '</h1>'
+                login_user(email, remember=form.rememberMe.data)
+                return redirect(url_for('fillingForm.allCurrentForm'))
+                ##return '<h1>' + "Hello " + form.email.data + email.password + '</h1>'
         else:
             return '<h1>Nothing</h1>'
 
     return render_template('login.html', form=form)
+
+
+@users.route('logout/')
+@login_required
+def logout():
+    logout_user()
+    return redirect("{{url_for('users.login/')}}")
 
