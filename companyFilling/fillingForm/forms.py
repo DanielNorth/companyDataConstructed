@@ -1,9 +1,8 @@
-from wtforms import StringField, SelectField, TextAreaField
+from wtforms import StringField, SelectField, TextAreaField, SubmitField
 from wtforms.fields.html5 import DateField
 from flask_wtf import FlaskForm
 from wtforms import validators
 from wtforms.validators import InputRequired, Length
-from flask_admin.form import DateTimePickerWidget
 
 
 class CompanyForm(FlaskForm):
@@ -17,3 +16,9 @@ class CompanyForm(FlaskForm):
     finanicalStatementEndDate = DateField('To', format='%d/%m/%Y')
 
     registeredOfficeAddress = TextAreaField('Address of Registered Office')
+    emailAddress = StringField('Email address: ')
+
+
+class AddCompany(FlaskForm):
+    companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=200)])
+    submit = SubmitField('Submit')

@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True)
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
-    company = db.relationship('CompanyData', backref='owner', lazy=True)
+    companies = db.relationship('Company', backref='owner', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -34,8 +34,27 @@ class User(db.Model, UserMixin):
         return self.username, self.email
 
 
-class CompanyData(db.Model):
-    companyName = db.Column(db.String(200), primary_key=True)
-    FillingYear = db.Column(db.String(100))
+class Company(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    companyName = db.Column(db.String(200))
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # The owner username of this company
+    # this is a many in the table
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    # this is a one in the table
+    # one company can have many form
+    nar1Form = db.relationship('Nar1', backref='company', lazy=True)
+
+    def __str__(self):
+        return self.companyName, self.owner_id
+
+
+class Nar1(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    # the company that owns the form
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+
+
+

@@ -21,7 +21,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-    from companyFilling.model import User, CompanyData
+    from companyFilling.model import User, Company
     with app.app_context():
        db.create_all()
 
@@ -34,10 +34,12 @@ def create_app():
     from companyFilling.homePage import homePage
     app.register_blueprint(homePage, url_prefix='/')
 
+
     from flask_admin.contrib.sqla import ModelView
     from flask_admin import Admin
     admins = Admin(app)
     admins.add_view(ModelView(User, db.session))
+    admins.add_view((ModelView(Company, db.session)))
 
 
     return app

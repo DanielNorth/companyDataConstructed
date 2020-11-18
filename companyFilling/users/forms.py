@@ -7,7 +7,7 @@ from companyFilling.model import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email: ', validators=[InputRequired(), Length(min=4, max=20)])
+    email = StringField('Email: ', validators=[InputRequired(), Length(min=4, max=80)])
     password = PasswordField('Password: ', validators=[InputRequired(), Length(min=6, max=80)])
     rememberMe = BooleanField('remember me')
 
