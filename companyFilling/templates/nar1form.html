@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<h1>Raw page</h1>
+
+{{ form.hidden_tag() }}
+{{ wtf.form_field(form.companyName) }}
+{{ wtf.form_field(form.businessName) }}
+{{ wtf.form_field(form.companyType) }}
+{{ wtf.form_field(form.date1) }}
+
+{{ wtf.form_field(form.finanicalStatementStartDate) }}
+{{ wtf.form_field(form.finanicalStatementEndDate) }}
+{{ wtf.form_field(form.registeredOfficeAddress) }}
+
+{% endblock %}

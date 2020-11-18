@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 
+{% block navBarItem %}
+
+<li class="nav-item">
+                <a class="nav-link" href="{{ url_for('fillingForm.NAR1') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Fill new form</span></a>
+</li>
+
+{% endblock %}
+
 
 {% block content %}
 

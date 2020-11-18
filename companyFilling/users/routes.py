@@ -35,8 +35,7 @@ def login():
         if email:
             if check_password_hash(email.password, form.password.data):
                 login_user(email, remember=form.rememberMe.data)
-                return redirect(url_for('fillingForm.allCurrentForm'))
-                ##return '<h1>' + "Hello " + form.email.data + email.password + '</h1>'
+                return redirect(url_for('fillingForm.all_form'))
         else:
             return '<h1>Nothing</h1>'
 
@@ -47,5 +46,5 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect("{{url_for('users.login/')}}")
+    return redirect(url_for('users.login/'))
 
