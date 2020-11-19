@@ -29,7 +29,8 @@ def create_app():
     app.register_blueprint(users, url_prefix='/users')
 
     from companyFilling.fillingForm.routes import fillingForm
-    app.register_blueprint(fillingForm, url_prefix='/company_form')
+    app.register_blueprint(fillingForm, url_prefix='/home')
+    #app.register_blueprint(fillingForm, url_prefix=f'/{current_user.username}')
 
     from companyFilling.homePage import homePage
     app.register_blueprint(homePage, url_prefix='/')

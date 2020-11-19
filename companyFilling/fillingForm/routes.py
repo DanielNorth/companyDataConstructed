@@ -3,14 +3,15 @@ from flask_login import login_user, current_user, logout_user, login_required
 from companyFilling.model import Company
 from companyFilling import db
 from companyFilling.fillingForm.forms import CompanyForm, AddCompany
+from companyFilling.users import routes
 
 
 fillingForm = Blueprint('fillingForm', __name__)
 
 
-@fillingForm.route('all_form/')
+@fillingForm.route('')
 @login_required
-def all_form():
+def home():
     return render_template('userPage.html', name=current_user.username)
 
 
@@ -19,6 +20,17 @@ def all_form():
 def NAR1():
     form = CompanyForm()
     return render_template('nar1form.html', form=form, name=current_user.username)
+
+
+@fillingForm.route('all_company/<company_id>')
+@login_required
+def all_form(company_id):
+    selectedCompany = Company.query.filter_by(id=company_id).first()
+    if str(current_user.id) != str(selectedCompany.owner_id):
+        return redirect(url_for('fillingForm.home'))
+
+    else:
+        return f'<h1>Fucking tired {selectedCompany.companyName}</h1?>'
 
 
 @fillingForm.route('all_company/')
@@ -40,3 +52,4 @@ def add_new_company():
         return redirect(url_for('fillingForm.all_form'))
 
     return render_template('addCompanyName.html', form=form)
+
