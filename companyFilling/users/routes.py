@@ -35,9 +35,11 @@ def login():
         if email:
             if check_password_hash(email.password, form.password.data):
                 login_user(email, remember=form.rememberMe.data)
-                return redirect(url_for('fillingForm.all_form'))
+                return redirect(url_for('fillingForm.home'))
+            else:
+                flash('Incorrect email or password')
         else:
-            return '<h1>Nothing</h1>'
+            flash('Incorrect email or password')
 
     return render_template('login.html', form=form)
 

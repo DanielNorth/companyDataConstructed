@@ -20,15 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be971fe9-f6b4-4bdd-8ed0-eeac5a387891" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/companyFilling/generatePdf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/fillingForm/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/fillingForm/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/homePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/homePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/templates/homePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/homePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/templates/showAllCreatedCompany.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/showAllCreatedCompany.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/users/routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

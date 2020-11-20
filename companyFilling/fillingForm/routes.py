@@ -3,7 +3,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 from companyFilling.model import Company
 from companyFilling import db
 from companyFilling.fillingForm.forms import CompanyForm, AddCompany
-from companyFilling.users import routes
 
 
 fillingForm = Blueprint('fillingForm', __name__)
@@ -49,7 +48,7 @@ def add_new_company():
         newCompany = Company(companyName=form.companyName.data, owner_id=current_user.id)
         db.session.add(newCompany)
         db.session.commit()
-        return redirect(url_for('fillingForm.all_form'))
+        return redirect(url_for('fillingForm.home'))
 
     return render_template('addCompanyName.html', form=form)
 
