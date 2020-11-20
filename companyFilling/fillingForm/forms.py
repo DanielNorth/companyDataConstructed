@@ -19,6 +19,9 @@ class CompanyForm(FlaskForm):
     emailAddress = StringField('Email address: ')
 
 
+    submit = SubmitField("Finish for now")
+
+
 class AddCompany(FlaskForm):
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=200)])
     submit = SubmitField('Submit')

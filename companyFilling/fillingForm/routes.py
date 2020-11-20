@@ -18,7 +18,7 @@ def home():
 @login_required
 def NAR1():
     form = CompanyForm()
-    return render_template('nar1form.html', form=form, name=current_user.username)
+    return render_template('nar1formTest.html', form=form, name=current_user.username)
 
 
 @fillingForm.route('all_company/<company_id>')
