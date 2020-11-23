@@ -44,17 +44,33 @@ class Company(db.Model, UserMixin):
 
     # this is a one in the table
     # one company can have many form
-    nar1Form = db.relationship('Nar1', backref='company', lazy=True)
+    nar1form = db.relationship('Nar1data', backref='company_file', lazy=True)
 
     def __str__(self):
         return self.companyName, self.owner_id
 
 
-class Nar1(db.Model):
+class Nar1data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # the company that owns the form
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+
+    companyName = db.Column(db.String(200))
+    businessName = db.Column(db.String(200))
+    typeOfCompany = db.Column(db.String(200))
+
+    date1 = db.Column(db.String(200))
+    financialStatementStartDate = db.Column(db.String(200))
+    financialStatementEndDate = db.Column(db.String(200))
+
+    registeredOfficeAddress = db.Column(db.Text())
+    emailAddress = db.Column(db.String(200))
+    mortgagesCharges = db.Column(db.Text())
+    q9 = db.Column(db.String(100))
+
+    def __str__(self):
+        return self.companyName, self.typeOfCompany
 
 
 

@@ -21,7 +21,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-    from companyFilling.model import User, Company
+    from companyFilling.model import User, Company, Nar1data
     with app.app_context():
        db.create_all()
 
