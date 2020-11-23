@@ -17,23 +17,24 @@ def home():
 @fillingForm.route('all_company/<company_id>', methods=['GET', 'POST'])
 @login_required
 def all_form(company_id):
+    # only allow to view company that they create
     selectedCompany = Company.query.filter_by(id=company_id).first()
     if str(current_user.id) != str(selectedCompany.owner_id):
         return redirect(url_for('fillingForm.home'))
 
     else:
         form = aButton()
+        companyForm = Nar1data.query.filter_by(company_id=company_id)
+
         if form.validate_on_submit():
             return redirect(url_for('fillingForm.fill_nar1_form', company_id=selectedCompany.id))
-        return render_template('addForm.html', form=form)
-
+        return render_template('addForm.html', form=form, companyForm=companyForm)
 
 
 @fillingForm.route('all_company/<company_id>/nar1_form', methods=["POST", 'GET'])
 @login_required
 def fill_nar1_form(company_id):
     form = Nar1Form()
-
     if form.validate_on_submit():
         newNar1 = Nar1data(company_id=company_id, companyName=form.companyName.data,
                        businessName=form.businessName.data, typeOfCompany=form.companyType.data,

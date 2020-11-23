@@ -69,7 +69,7 @@ class Nar1data(db.Model):
     mortgagesCharges = db.Column(db.Text())
     q9 = db.Column(db.String(100))
 
-    def __str__(self):
+    def __repr__(self):
         return self.companyName, self.typeOfCompany
 
 

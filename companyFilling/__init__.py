@@ -41,6 +41,7 @@ def create_app():
     admins = Admin(app)
     admins.add_view(ModelView(User, db.session))
     admins.add_view((ModelView(Company, db.session)))
+    admins.add_view(ModelView(Nar1data, db.session))
 
 
     return app
