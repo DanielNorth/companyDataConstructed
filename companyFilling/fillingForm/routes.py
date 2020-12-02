@@ -1,8 +1,9 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from companyFilling.model import Company, Nar1data
 from companyFilling import db
 from companyFilling.fillingForm.forms import Nar1Form, AddCompany, aButton
+import os
 
 
 fillingForm = Blueprint('fillingForm', __name__)
@@ -13,14 +14,14 @@ fillingForm = Blueprint('fillingForm', __name__)
 def home():
     return render_template('userPage.html', name=current_user.username)
 
-
 @fillingForm.route('all_company/<company_id>', methods=['GET', 'POST'])
 @login_required
 def all_form(company_id):
     # only allow to view company that they create
     selectedCompany = Company.query.filter_by(id=company_id).first()
+
     if str(current_user.id) != str(selectedCompany.owner_id):
-        return redirect(url_for('fillingForm.home'))
+        abort(403)
 
     else:
         form = aButton()
@@ -47,6 +48,31 @@ def fill_nar1_form(company_id):
         return redirect(url_for('fillingForm.home'))
 
     return render_template('nar1formTest.html', form=form, name=current_user.username)
+
+
+@fillingForm.route('nar1_download/<form_number>', methods=["POST", "GET"])
+@login_required
+def nar1_pdf_download(form_number):
+    pass
+    selectedForm = Nar1data.query.filter_by(id=form_number).first()
+    formOwner = Company.query.filter_by(id=selectedForm.company_id).first()
+
+    return '<h1>' + 'asdfdsf' + '</h1>'
+
+    if current_user.id != formOwner.owner_id:
+       abort(403)
+
+    else:
+        from companyFilling import generatePdf
+        # generatePdf.changeNAR1Form(form_number,current_user.username, selectedForm.companyName, selectedForm.businessName,12,N)
+
+        pdfDir = f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{selectedForm.id}.pdf'
+
+        outfile = generatePdf.changeNAR1Form('selectedFormid', current_user.username, selectedForm.companyName,
+                                             selectedForm.businessName)
+
+        # return send_file(outfile, as_attachment=True, mimetype='pdf')
+
 
 
 @fillingForm.route('all_company/')

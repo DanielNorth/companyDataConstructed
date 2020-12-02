@@ -1,14 +1,6 @@
 from collections import OrderedDict
 from PyPDF2 import PdfFileWriter, PdfFileReader
-
-companyNumber = 'Company Number to be filled'
-companyName = 'Company Name to be filled'
-businessName = 'business name to be filled'
-
-
-fillingOrder = [companyNumber, companyNumber, businessName]
-for i in range(1000):
-    fillingOrder.append(i)
+import os
 
 
 def _getFields(obj, tree=None, retval=None, fileobj=None):
@@ -60,9 +52,21 @@ def get_form_fields(infile):
     return OrderedDict((k, v.get('/V', '')) for k, v in fields.items())
 
 
-def update_form_values(infile, outfile, newvals=None):
+def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newvals=None):
+    infile = os.getcwd() + '\\companyFilling\\static\\pdfFile\\NAR1_fillable.pdf'
+    outfile = os.getcwd() + f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{outfile_loc}.pdf'
+    print('fuck')
+    print(outfile)
+
+    # infile = '\\companyFilling\\static\\pdfFile\\NAR1_fillable.pdf'
+    # outfile = f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{outfile}.pdf'
+
     pdf = PdfFileReader(open(infile, 'rb'))
     writer = PdfFileWriter()
+
+    fillingOrder = [companynumber, companyName, businessname]
+    for _ in range(100):
+        fillingOrder.append('nothing')
 
     for i in range(pdf.getNumPages()):
         page = pdf.getPage(i)
@@ -70,7 +74,7 @@ def update_form_values(infile, outfile, newvals=None):
             if newvals:
                 writer.updatePageFormFieldValues(page, newvals)
             else:
-                writer.updatePageFormFieldValues(page, {k: f'{fillingOrder[i]}---{i} {k}={v}' for i, (k, v) in
+                writer.updatePageFormFieldValues(page, {k: f'{fillingOrder[i]}-{i} {k}' for i, (k, v) in
                                                         enumerate(get_form_fields(infile).items())
                                                         })
             writer.addPage(page)
@@ -81,15 +85,7 @@ def update_form_values(infile, outfile, newvals=None):
     with open(outfile, 'wb') as out:
         writer.write(out)
 
+    return str(outfile)
 
-if __name__ == '__main__':
-    from pprint import pprint
 
-    pdf_file_name = 'NAR1_fillable.pdf'
 
-    pprint(get_form_fields(pdf_file_name))
-
-    update_form_values(pdf_file_name, 'out-' + pdf_file_name)  # enumerate & fill the fields with their own names
-    update_form_values(pdf_file_name, 'out2-' + pdf_file_name,
-                       {'my_fieldname_1': 'My Value',
-                        'my_fieldname_2': 'My Another Value'})  # update the form fields
