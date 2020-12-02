@@ -52,11 +52,10 @@ def get_form_fields(infile):
     return OrderedDict((k, v.get('/V', '')) for k, v in fields.items())
 
 
-def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newvals=None):
+#def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newvals=None):
+def changeNAR1Form(outfile_loc, fillingOrder, newvals=None):
     infile = os.getcwd() + '\\companyFilling\\static\\pdfFile\\NAR1_fillable.pdf'
     outfile = os.getcwd() + f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{outfile_loc}.pdf'
-    print('fuck')
-    print(outfile)
 
     # infile = '\\companyFilling\\static\\pdfFile\\NAR1_fillable.pdf'
     # outfile = f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{outfile}.pdf'
@@ -64,9 +63,8 @@ def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newval
     pdf = PdfFileReader(open(infile, 'rb'))
     writer = PdfFileWriter()
 
-    fillingOrder = [companynumber, companyName, businessname]
-    for _ in range(100):
-        fillingOrder.append('nothing')
+    for i in range(300):
+        fillingOrder.append(i)
 
     for i in range(pdf.getNumPages()):
         page = pdf.getPage(i)
@@ -74,7 +72,7 @@ def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newval
             if newvals:
                 writer.updatePageFormFieldValues(page, newvals)
             else:
-                writer.updatePageFormFieldValues(page, {k: f'{fillingOrder[i]}-{i} {k}' for i, (k, v) in
+                writer.updatePageFormFieldValues(page, {k: f'{fillingOrder[i]}' for i, (k, v) in
                                                         enumerate(get_form_fields(infile).items())
                                                         })
             writer.addPage(page)
@@ -85,7 +83,6 @@ def changeNAR1Form(outfile_loc, companynumber, companyName, businessname, newval
     with open(outfile, 'wb') as out:
         writer.write(out)
 
-    return str(outfile)
 
 
 

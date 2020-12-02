@@ -14,6 +14,7 @@ fillingForm = Blueprint('fillingForm', __name__)
 def home():
     return render_template('userPage.html', name=current_user.username)
 
+
 @fillingForm.route('all_company/<company_id>', methods=['GET', 'POST'])
 @login_required
 def all_form(company_id):
@@ -53,25 +54,21 @@ def fill_nar1_form(company_id):
 @fillingForm.route('nar1_download/<form_number>', methods=["POST", "GET"])
 @login_required
 def nar1_pdf_download(form_number):
-    pass
     selectedForm = Nar1data.query.filter_by(id=form_number).first()
     formOwner = Company.query.filter_by(id=selectedForm.company_id).first()
-
-    return '<h1>' + 'asdfdsf' + '</h1>'
 
     if current_user.id != formOwner.owner_id:
        abort(403)
 
     else:
         from companyFilling import generatePdf
-        # generatePdf.changeNAR1Form(form_number,current_user.username, selectedForm.companyName, selectedForm.businessName,12,N)
+        generatePdf.changeNAR1Form(form_number, ['', selectedForm.companyName, selectedForm.businessName,  # 0-2
+                                                selectedForm.date1, selectedForm.registeredOfficeAddress, '456' # 3-5
+                                                 ])
 
-        pdfDir = f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{selectedForm.id}.pdf'
 
-        outfile = generatePdf.changeNAR1Form('selectedFormid', current_user.username, selectedForm.companyName,
-                                             selectedForm.businessName)
-
-        # return send_file(outfile, as_attachment=True, mimetype='pdf')
+        pdfDir = os.getcwd() + f'\\companyFilling\\static\\pdfFile\\nar1_company_form\\{form_number}.pdf'
+        return send_file(pdfDir, as_attachment=True)
 
 
 
