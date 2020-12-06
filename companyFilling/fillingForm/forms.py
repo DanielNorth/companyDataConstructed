@@ -38,8 +38,17 @@ class Nar1Form(FlaskForm):
     f52 = StringField('Name in English (Surname)', validators=[validators.Optional()])
     f53 = StringField('Name in English (Other names)', validators=[validators.Optional()])
 
-    f87 = StringField("Email Address", validators=[validators.Optional()])
+    f58 = StringField('Hong Kong Address', validators=[validators.Optional()])
+    f59 = StringField('Hong Kong Address', validators=[validators.Optional()])
+    f60 = StringField('Hong Kong Address', validators=[validators.Optional()])
+    f61 = StringField("Email Address", validators=[validators.Optional()])
 
+    f70 = StringField('Company Number', validators=[validators.Optional()])
+
+    # Director 1
+    f76 = StringField('Name in Chinese', validators=[validators.Optional()])
+
+    f87 = StringField("Email Address", validators=[validators.Optional()])
 
 
     submit = SubmitField("Finish for now", render_kw={"onclick": "Are you sure you want to submit"})

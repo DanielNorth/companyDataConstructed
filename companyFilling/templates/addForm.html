@@ -29,7 +29,7 @@
 
                 {% for form in companyForm %}
                 <tr>
-                    <td>{{form.companyName}}</td>
+                    <td><a href="{{ url_for('fillingForm.edit_form', nar1_number=form.id) }}">{{form.companyName}}</td>
                     <td><a href="#">{{ form.businessName }}</a></td>
                     <td><a href="{{ url_for('fillingForm.nar1_pdf_download', form_number=form.id) }}">Download</a> </td>
                 </tr>

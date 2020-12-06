@@ -70,8 +70,9 @@ $(document).ready(function() {
     </ul>
 
     <div class="tab-content">
+        <form method="post">
         <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1" >
-            <form method="post">
+
                 {{ form.hidden_tag() }}
                 {{ wtf.form_field(form.companyName) }}
                 {{ wtf.form_field(form.businessName) }}
@@ -82,10 +83,14 @@ $(document).ready(function() {
                 {{ wtf.form_field(form.registeredOfficeAddress) }}
                 {{ wtf.form_field(form.emailAddress) }}
                 {{ wtf.form_field(form.submit) }}
-            </form>
 
         </div>
         <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+            {{ wtf.form_field(form.f50) }}
+            {{ wtf.form_field(form.f51) }}
+            {{ wtf.form_field(form.f52) }}
+            {{ wtf.form_field(form.f53) }}
+            {{ wtf.form_field(form.f61) }}
             Company Secretary
         </div>
         <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
@@ -94,6 +99,7 @@ $(document).ready(function() {
         <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
             Step 4 Content
         </div>
+            </form>
     </div>
 </div>
 

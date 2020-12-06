@@ -20,15 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be971fe9-f6b4-4bdd-8ed0-eeac5a387891" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/companyFilling/templates/edit_nar1_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/fillingForm/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/fillingForm/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/static/css/jquery_steps.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/jQueryForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/jquery_steps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/jquery_steps_min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/myScript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/companyFilling/templates/nar1form.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/nar1form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/fillingForm/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/fillingForm/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/aScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/jquery.steps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/static/js/jquery.steps.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/templates/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companyFilling/templates/addForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/addForm.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companyFilling/templates/nar1formTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/companyFilling/templates/nar1formTest.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

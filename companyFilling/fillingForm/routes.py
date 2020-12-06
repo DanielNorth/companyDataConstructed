@@ -92,3 +92,20 @@ def add_new_company():
 
     return render_template('addCompanyName.html', form=form)
 
+
+@fillingForm.route('edit_form/<nar1_number>', methods=['GET', "POST"])
+@login_required
+def edit_form(nar1_number):
+    selectedForm = Nar1data.query.filter_by(id=nar1_number).first()
+    formOwner = Company.query.filter_by(id=selectedForm.company_id).first()
+
+    if current_user.id != formOwner.owner_id:
+        abort(403)
+    else:
+        form = Nar1Form(obj=selectedForm)
+
+        if form.validate_on_submit():
+
+            return redirect(url_for('fillingForm.home'))
+
+        return render_template('nar1formTest.html', form=form)
