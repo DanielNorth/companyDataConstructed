@@ -13,6 +13,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
+                    <th>Edit form</th>
                     <th>Nar1 Company name</th>
                     <th>Nar1 Business name</th>
                     <th>Download pdf</th>
@@ -20,6 +21,7 @@
                 </thead>
                 <tfoot>
                 <tr>
+                    <th>Edit form</th>
                     <th>Nar1 Company name </th>
                     <th>Nar1 Business name</th>
                     <th>Download pdf</th>
@@ -29,7 +31,8 @@
 
                 {% for form in companyForm %}
                 <tr>
-                    <td><a href="{{ url_for('fillingForm.edit_form', nar1_number=form.id) }}">{{form.companyName}}</td>
+                    <td><a href="{{ url_for('fillingForm.edit_form', nar1_number=form.id) }}">Edit</td>
+                    <td>{{form.companyName}}</td>
                     <td><a href="#">{{ form.businessName }}</a></td>
                     <td><a href="{{ url_for('fillingForm.nar1_pdf_download', form_number=form.id) }}">Download</a> </td>
                 </tr>

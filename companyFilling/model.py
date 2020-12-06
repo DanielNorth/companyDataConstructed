@@ -60,9 +60,9 @@ class Nar1data(db.Model):
     businessName = db.Column(db.String(200))
     typeOfCompany = db.Column(db.String(200))
 
-    date1 = db.Column(db.String(200))
-    financialStatementStartDate = db.Column(db.String(200))
-    financialStatementEndDate = db.Column(db.String(200))
+    date1 = db.Column(db.DateTime)
+    financialStatementStartDate = db.Column(db.DateTime)
+    financialStatementEndDate = db.Column(db.DateTime)
 
     registeredOfficeAddress = db.Column(db.Text())
     emailAddress = db.Column(db.String(200))
