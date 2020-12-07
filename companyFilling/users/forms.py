@@ -26,5 +26,13 @@ class RegisterForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
-    email = EmailField('Email', [validators.DataRequired(), validators.Email()])
-    Submit = SubmitField("Reset password")
+    email = EmailField('Email', [validators.DataRequired(), validators.Email()], render_kw={"placeholder": "Enter Email Address",
+                                                                                            'class': "form-control form-control-user",
+                                                                                            'id': "exampleInputEmail",
+                                                                                            'aria - describedby': "emailHelp",
+                                                                                            'type': "email"})
+
+
+class NewPassword(FlaskForm):
+    newPassword = PasswordField('New password: ', validators=[InputRequired(), Length(min=6, max=80)])
+    confirmedNewPassword = PasswordField('Confirmed password: ', validators=[InputRequired(), Length(min=6, max=80)])

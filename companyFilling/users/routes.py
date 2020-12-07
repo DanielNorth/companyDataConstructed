@@ -1,9 +1,11 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from companyFilling.users.forms import RegisterForm, LoginForm
+from companyFilling.users.forms import RegisterForm, LoginForm, ResetPasswordForm, NewPassword
 from companyFilling.model import User
-from companyFilling import db
+from companyFilling import db, mail
+from companyFilling.users.utils import send_reset_email
+from flask_mail import Message
 
 users = Blueprint('users', __name__)
 
@@ -39,7 +41,7 @@ def login():
             else:
                 flash('Incorrect email or password')
         else:
-            flash('Incorrect email or password')
+            flash('Incorrect email or password', 'warning')
 
     return render_template('login.html', form=form)
 
@@ -49,4 +51,44 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('users.login/'))
+
+
+@users.route('/reset_password', methods=["GET", "POST"])
+def reset_request():
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_reset_email(user)
+            flash('An email has been send')
+            return redirect(url_for('users.login/'))
+        else:
+            flash("The email doesn't exist in our database")
+        #
+        # else:
+        #     flash("Email doesn't exist")
+
+    return render_template('forgot-password.html', title='Reset Password', form=form)
+
+
+@users.route('/reset_password/<token>', methods=["GET", "POST"])
+def reset_token(token):
+
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash("That is an invalid Token", 'warning')
+        return redirect(url_for('users.reset_request'))
+
+    form = NewPassword()
+    if form.validate_on_submit():
+        if form.newPassword.data == form.confirmedNewPassword.data:
+            hashed_password = generate_password_hash(form.newPassword.data, method='sha256')
+            user.password = hashed_password
+            db.session.commit()
+            flash("your password is reset, you are now able to log in")
+            return redirect(url_for('users.login/'))
+
+    return render_template('reset_password.html', title='Reset Password', form=form)
+
+
 
