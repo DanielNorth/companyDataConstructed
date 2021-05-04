@@ -1,4 +1,5 @@
-from wtforms import StringField, SelectField, TextAreaField, SubmitField
+from wtforms import StringField, SelectField, TextAreaField, SubmitField, \
+                    IntegerField, Form, FieldList, FormField
 from wtforms.fields.html5 import DateField
 from flask_wtf import FlaskForm
 from wtforms import validators
@@ -8,7 +9,7 @@ from wtforms.validators import InputRequired, Length
 class Nar1Form(FlaskForm):
 
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=300)])
-    businessName = StringField('Business Name (if any)', validators=[validators.Optional()])
+    S2compName = StringField('Business Name (if any)', validators=[validators.Optional()])
     companyType = SelectField('Type of Company', choices=['Private company ', 'Public company',
                                                           'Company limited by guarantee'])
     date1 = DateField('Date to which this Return is Made Up', format='%Y-%m-%d', validators=[validators.Optional()])
@@ -30,6 +31,21 @@ class Nar1Form(FlaskForm):
     f43 = StringField('Currency', validators=[validators.Optional()])
     f44 = StringField('Currency', validators=[validators.Optional()])
 
+    f27 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+    f38 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+    f39 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+    f40 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+
+    f28 = StringField("Total Amount of issued Shares", validators=[validators.Optional()])
+    f34 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+    f35 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+    f36 = StringField("Total Number of issued Shares", validators=[validators.Optional()])
+
+    f29 = StringField("Total amount paid up or regarded as paid up", validators=[validators.Optional()])
+    f30 = StringField("Total amount paid up or regarded as paid up", validators=[validators.Optional()])
+    f31 = StringField("Total amount paid up or regarded as paid up", validators=[validators.Optional()])
+    f32 = StringField("Total amount paid up or regarded as paid up", validators=[validators.Optional()])
+
     # Company Secretary Page
     # header in the html stage that it's for the secretary page
     f50 = StringField('Company Number', validators=[validators.Optional()])
@@ -42,6 +58,9 @@ class Nar1Form(FlaskForm):
     f59 = StringField('Hong Kong Address', validators=[validators.Optional()])
     f60 = StringField('Hong Kong Address', validators=[validators.Optional()])
     f61 = StringField("Email Address", validators=[validators.Optional()])
+    f62 = StringField("Passport issued Country", validators=[validators.Optional()])
+    f63 = StringField("Passport Number", validators=[validators.Optional()])
+
 
     f70 = StringField('Company Number', validators=[validators.Optional()])
 
@@ -57,7 +76,37 @@ class Nar1Form(FlaskForm):
 class AddCompany(FlaskForm):
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=200)])
     submit = SubmitField('Submit')
+    companyAC = StringField("Company Account Name: (leave empty if don't currently have one)", validators=[validators.optional()])
+    companyACpassword = StringField("Company Account Password: (leave empty if don't currently have one)", validators=[validators.optional()])
 
 
 class aButton(FlaskForm):
     submit = SubmitField('file a new Nar1 form')
+
+
+class Director(Form):
+    name = StringField("Directors Name")
+    idNumber = StringField("Director HKID number")
+    PassportCountry = StringField("Director Passport issued Country")
+    PassportNum = StringField("Director passport number")
+
+
+class ShareCapital(Form):
+    classOfShares = StringField("Class of shares")
+    currency = StringField("Currency")
+    totalNumber = IntegerField("total number")
+    totalAmount = IntegerField("total amount")
+    totalPaidUp = IntegerField("Total Amount Paid up or Registered as Paid up")
+
+
+class CompanyInfo(FlaskForm):
+    companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=300)])
+    businessName = StringField("Business Name(if any):", validators=[validators.optional()])
+    submit = SubmitField("Finish for now", render_kw={"onclick": "Are you sure you want to submit"})
+
+    nonShareHolder = IntegerField("Number of Member(s) of a Company Not Having a Share Capital", validators=[validators.optional()])
+    shares_issued = IntegerField("Number of shares issued")
+
+    number_of_directors = IntegerField('Number of director(s)', [validators.NumberRange(min=0, max=50)])
+    director = FieldList(FormField(Director), min_entries=0, max_entries=20)
+    shareCapital = FieldList(FormField(ShareCapital), min_entries=0)

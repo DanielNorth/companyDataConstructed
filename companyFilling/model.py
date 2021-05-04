@@ -12,7 +12,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True)
+    username = db.Column(db.String(20))
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
     companies = db.relationship('Company', backref='owner', lazy=True)
@@ -37,6 +37,10 @@ class User(db.Model, UserMixin):
 class Company(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     companyName = db.Column(db.String(200))
+    companyAC = db.Column(db.String(200), nullable=True)
+    companyACpassword = db.Column(db.String(200), nullable=True)
+
+    #number_of_directors = db.Column(db.Integer)
 
     # The owner username of this company
     # this is a many in the table
@@ -46,8 +50,23 @@ class Company(db.Model, UserMixin):
     # one company can have many form
     nar1form = db.relationship('Nar1data', backref='company_file', lazy=True)
 
+    # one to one to the director model
+
     def __str__(self):
         return self.companyName, self.owner_id
+
+
+class Director(db.Model):
+    __tablename__ = 'directors'
+    id = db.Column(db.Integer, primary_key=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+
+    name = db.Column(db.String(200))
+    idNumber = db.Column(db.String(200))
+    PassportCountry = db.Column(db.String(200))
+    PassportNum = db.Column(db.String(200))
+
+    company = db.relationship("Company", backref=db.backref('directors', lazy='dynamic', collection_class=list))
 
 
 class Nar1data(db.Model):
@@ -57,7 +76,7 @@ class Nar1data(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
 
     companyName = db.Column(db.String(200))
-    businessName = db.Column(db.String(200))
+    S2compName = db.Column(db.String(200))
     typeOfCompany = db.Column(db.String(200))
 
     date1 = db.Column(db.DateTime)
@@ -71,6 +90,4 @@ class Nar1data(db.Model):
 
     def __repr__(self):
         return self.companyName, self.typeOfCompany
-
-
 

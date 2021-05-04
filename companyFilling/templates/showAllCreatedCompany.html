@@ -14,6 +14,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Company name</th>
+                                            <th>Edit Company Information</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -21,6 +22,7 @@
 
                                             <th>Name </th>
                                             <th>Company name</th>
+                                            <th>Edit Company Information</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -29,6 +31,8 @@
                                         <tr>
                                             <td>{{username}}</td>
                                             <td><a href="{{ company.id|string }}">{{ company.companyName }}</a></td>
+                                            <td><a href="{{ url_for('fillingForm.edit_company_info', company_id=company.id) }}">Edit</a></td>
+
 
                                         </tr>
 

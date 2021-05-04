@@ -5,8 +5,9 @@
 {% block content %}
 
 <div class="card shadow mb-4">
+
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">All Companies</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Nar1 form</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -31,10 +32,11 @@
 
                 {% for form in companyForm %}
                 <tr>
-                    <td><a href="{{ url_for('fillingForm.edit_form', nar1_number=form.id) }}">Edit</td>
+                    <td><a href="{{ url_for('fillingForm.edit_form', nar1_number=form.id) }}">Edit</a></td>
                     <td>{{form.companyName}}</td>
                     <td><a href="#">{{ form.businessName }}</a></td>
                     <td><a href="{{ url_for('fillingForm.nar1_pdf_download', form_number=form.id) }}">Download</a> </td>
+
                 </tr>
                 {% endfor %}
 
@@ -44,10 +46,8 @@
     </div>
 </div>
 
-
 <form class="user" method="POST">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.submit) }}
+    <input type="submit" name="action" value="new_form"></p>
 </form>
 
 {% endblock %}

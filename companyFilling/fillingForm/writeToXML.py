@@ -1,0 +1,329 @@
+myString = """
+<Eform xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CR-Format.xsd" id="NAR1">
+<TextField id="language">E</TextField>
+<TextField id="hiddenCompNo">1729462</TextField>
+<TextField id="compName">GREAT RICH SUCCESS INTL LIMITED 大展鴻圖國際有限公司</TextField>
+<TextField id="S2compName"/>
+<TextField id="S3compTypeGrp">S3compTypeGrp1</TextField>
+<TextField id="S4returnDate">20141015</TextField>
+<TextField id="S6addr1">Room 8801-8803, 88/F, Happy Commercial Building,</TextField>
+<TextField id="S6addr2">1 Queensway</TextField>
+<TextField id="S6addr3"/>
+<TextField id="S6addrCountry">Hong Kong</TextField>
+<TextField id="S7email">greatrich@ehkmail.ccm.hks</TextField>
+<TextField id="S8mortgagesNCharges"/>
+<TableField id="S10capitalTab">
+<Row>
+<Column id="S10capitalTab[0][0]">Ordinary</Column>
+<Column id="S10capitalTab[0][1]">HKD</Column>
+<Column id="S10capitalTab[0][2]">10000</Column>
+<Column id="S10capitalTab[0][3]">1000000</Column>
+<Column id="S10capitalTab[0][4]">1000000</Column>
+</Row>
+<Row>
+<Column id="S10capitalTab[1][0]">Preference</Column>
+<Column id="S10capitalTab[1][1]">USD</Column>
+<Column id="S10capitalTab[1][2]">6000</Column>
+<Column id="S10capitalTab[1][3]">500000</Column>
+<Column id="S10capitalTab[1][4]">200000</Column>
+</Row>
+<Row>
+<Column id="S10capitalTab[2][0]">Redeemable</Column>
+<Column id="S10capitalTab[2][1]">EUR</Column>
+<Column id="S10capitalTab[2][2]">2000</Column>
+<Column id="S10capitalTab[2][3]">300000</Column>
+<Column id="S10capitalTab[2][4]">0</Column>
+</Row>
+</TableField>
+<TableField id="S10ttlCaptialTab">
+<Row>
+<Column id="S10ttlCaptialTab[0][0]">EUR</Column>
+<Column id="S10ttlCaptialTab[0][1]"/>
+<Column id="S10ttlCaptialTab[0][2]">300000</Column>
+<Column id="S10ttlCaptialTab[0][3]">0</Column>
+</Row>
+<Row>
+<Column id="S10ttlCaptialTab[1][0]">HKD</Column>
+<Column id="S10ttlCaptialTab[1][1]"/>
+<Column id="S10ttlCaptialTab[1][2]">1000000</Column>
+<Column id="S10ttlCaptialTab[1][3]">1000000</Column>
+</Row>
+<Row>
+<Column id="S10ttlCaptialTab[2][0]">USD</Column>
+<Column id="S10ttlCaptialTab[2][1]"/>
+<Column id="S10ttlCaptialTab[2][2]">500000</Column>
+<Column id="S10ttlCaptialTab[2][3]">200000</Column>
+</Row>
+</TableField>
+<TextField id="S11ACount">2</TextField>
+<TextField id="S11AchnName[0]"/>
+<TextField id="S11AengSurname[0]">WONG</TextField>
+<TextField id="S11AengOthName[0]">TAI MAN</TextField>
+<TextField id="S11AchnPreName[0]"/>
+<TextField id="S11AengPreName[0]"/>
+<TextField id="S11AchnAlias[0]"/>
+<TextField id="S11AengAlias[0]"/>
+<TextField id="S11Aaddr1[0]">No. 391, 3/F., Lucky Building,</TextField>
+<TextField id="S11Aaddr2[0]">288 Nathan Road,</TextField>
+<TextField id="S11Aaddr3[0]">Kowloon</TextField>
+<TextField id="S11AaddrCountry[0]">Hong Kong</TextField>
+<TextField id="S11Aemail[0]">wongtaiman@ehkmail.ccm.hks</TextField>
+<TextField id="S11AHKID[0]">A311982</TextField>
+<TextField id="S11AHKIDChkDig[0]">6</TextField>
+<TextField id="S11ApassportCountry[0]"/>
+<TextField id="S11ApassportNo[0]"/>
+<TextField id="S11AchnName[1]">李比舒</TextField>
+<TextField id="S11AengSurname[1]">LI</TextField>
+<TextField id="S11AengOthName[1]">BEI SHU</TextField>
+<TextField id="S11AchnPreName[1]"/>
+<TextField id="S11AengPreName[1]"/>
+<TextField id="S11AchnAlias[1]"/>
+<TextField id="S11AengAlias[1]"/>
+<TextField id="S11Aaddr1[1]">Flat B, 2/F, Rich Mansion, 111 Full Moon Road,</TextField>
+<TextField id="S11Aaddr2[1]">Fanling, New Territories</TextField>
+<TextField id="S11Aaddr3[1]"/>
+<TextField id="S11AaddrCountry[1]">Hong Kong</TextField>
+<TextField id="S11Aemail[1]">libeishu@ehkmail.ccm.hks</TextField>
+<TextField id="S11AHKID[1]">A118245</TextField>
+<TextField id="S11AHKIDChkDig[1]">8</TextField>
+<TextField id="S11ApassportCountry[1]"/>
+<TextField id="S11ApassportNo[1]"/>
+<TextField id="S11BCount">1</TextField>
+<TextField id="S11BchnName[0]">優質秘書服務有限公司</TextField>
+<TextField id="S11BengName[0]">QualiSec Services Limited</TextField>
+<TextField id="S11Baddr1[0]">Room 708, 7/F, Lucky Commercial Building,</TextField>
+<TextField id="S11Baddr2[0]">2 Nathan Road,</TextField>
+<TextField id="S11Baddr3[0]">Kowloon</TextField>
+<TextField id="S11BaddrCountry[0]">Hong Kong</TextField>
+<TextField id="S11Bemail[0]">qualisec@ehkmail.ccm.hks</TextField>
+<TextField id="S11BcompNo[0]">1729373</TextField>
+<TextField id="S12ACount">2</TextField>
+<TextField id="S12AcapacityGroup1[0]">true</TextField>
+<TextField id="S12AcapacityGroup2[0]">false</TextField>
+<TextField id="S12AalternateTo[0]"/>
+<TextField id="S12AchnName[0]">高鼓植</TextField>
+<TextField id="S12AengSurname[0]">KO</TextField>
+<TextField id="S12AengOthName[0]">GOO JIK JACKIE</TextField>
+<TextField id="S12AchnPreName[0]"/>
+<TextField id="S12AengPreName[0]"/>
+<TextField id="S12AchnAlias[0]"/>
+<TextField id="S12AengAlias[0]"/>
+<TextField id="S12Aaddr1[0]">Flat A, 18/F, Fortune Mansion,</TextField>
+<TextField id="S12Aaddr2[0]">1 Cheung Sha Wan Road, Kowloon</TextField>
+<TextField id="S12Aaddr3[0]"/>
+<TextField id="S12AaddrCountry[0]">Hong Kong</TextField>
+<TextField id="S12Aemail[0]">goo.jik@ehkmail.ccm.hks</TextField>
+<TextField id="S12AHKID[0]">A515341</TextField>
+<TextField id="S12AHKIDChkDig[0]">A</TextField>
+<TextField id="S12ApassportCountry[0]"/>
+<TextField id="S12ApassportNo[0]"/>
+<TextField id="S12AcapacityGroup1[1]">true</TextField>
+<TextField id="S12AcapacityGroup2[1]">false</TextField>
+<TextField id="S12AalternateTo[1]"/>
+<TextField id="S12AchnName[1]">利豐盈</TextField>
+<TextField id="S12AengSurname[1]">LEE</TextField>
+<TextField id="S12AengOthName[1]">FUNG YING</TextField>
+<TextField id="S12AchnPreName[1]"/>
+<TextField id="S12AengPreName[1]"/>
+<TextField id="S12AchnAlias[1]"/>
+<TextField id="S12AengAlias[1]"/>
+<TextField id="S12Aaddr1[1]">G/F, 45 Green Lane, New York</TextField>
+<TextField id="S12Aaddr2[1]"/>
+<TextField id="S12Aaddr3[1]"/>
+<TextField id="S12AaddrCountry[1]">United States</TextField>
+<TextField id="S12Aemail[1]">fungying@ehkmail.ccm.hks</TextField>
+<TextField id="S12AHKID[1]"/>
+<TextField id="S12AHKIDChkDig[1]"/>
+<TextField id="S12ApassportCountry[1]">United States</TextField>
+<TextField id="S12ApassportNo[1]">123456789</TextField>
+<TextField id="S12BCount">2</TextField>
+<TextField id="S12BcapacityGroup1[0]">true</TextField>
+<TextField id="S12BcapacityGroup2[0]">false</TextField>
+<TextField id="S12BalternateTo[0]"/>
+<TextField id="S12BchnName[0]">南餘有限公司</TextField>
+<TextField id="S12BengName[0]">South Profits Limited</TextField>
+<TextField id="S12Baddr1[0]">Room 2808-2810, 28/F,</TextField>
+<TextField id="S12Baddr2[0]">Happy Commercial Building,</TextField>
+<TextField id="S12Baddr3[0]">1 Queen'sway</TextField>
+<TextField id="S12BaddrCountry[0]">Hong Kong</TextField>
+<TextField id="S12Bemail[0]">southprofit@ehkmail.ccm.hks </TextField>
+<TextField id="S12BcompNo[0]">1729443</TextField>
+<TextField id="S12BcapacityGroup1[1]">true</TextField>
+<TextField id="S12BcapacityGroup2[1]">false</TextField>
+<TextField id="S12BalternateTo[1]"/>
+<TextField id="S12BchnName[1]"/>
+<TextField id="S12BengName[1]">Richard Wealth (BVI) Limited</TextField>
+<TextField id="S12Baddr1[1]">2 Woodland Street, Road Town</TextField>
+<TextField id="S12Baddr2[1]">Queen's Road Central</TextField>
+<TextField id="S12Baddr3[1]"/>
+<TextField id="S12BaddrCountry[1]">Hong Kong</TextField>
+<TextField id="S12Bemail[1]"/>
+<TextField id="S12BcompNo[1]">1729368</TextField>
+<TextField id="S12CchnName">李好運</TextField>
+<TextField id="S12CengSurname">LEE</TextField>
+<TextField id="S12CengOthName">HO WAN JOHN</TextField>
+<TextField id="S12CchnPreName"/>
+<TextField id="S12CengPreName"/>
+<TextField id="S12CchnAlias"/>
+<TextField id="S12CengAlias"/>
+<TextField id="S12Caddr1">FLAT A, 2/F, BLOCK 1, SUN TING GARDEN</TextField>
+<TextField id="S12Caddr2">990 TAI PO ROAD, SHATIN,</TextField>
+<TextField id="S12Caddr3">NEW TERRITORIES, HONG KONG</TextField>
+<TextField id="S12CaddrCountry">Hong Kong</TextField>
+<TextField id="S12Cemail"/>
+<TextField id="S12CHKID">A452142</TextField>
+<TextField id="S12CHKIDChkDig">3</TextField>
+<TextField id="S12CpassportCountry"/>
+<TextField id="S12CpassportNo"/>
+<TextField id="enableSch">enableSch1</TextField>
+<TextField id="S14companyRecord"/>
+<TextField id="S14addr"/>
+<TextField id="S15statement">true</TextField>
+<TextField id="signName">優質秘書服務有限公司</TextField>
+<TextField id="signCapacity">註冊代理人 Registered Agent</TextField>
+<TextField id="signDate">20141230</TextField>
+<TextField id="nameCapacity">優質秘書服務有限公司##QualiSec Services Limited##G</TextField>
+<TextField id="nameCRNo">優質秘書服務有限公司##QualiSec Services Limited##1729373</TextField>
+<TextField id="signatoryCRNo">1729373</TextField>
+<TextField id="Sch1PageCount">5</TextField>
+<TextField id="Sch2PageCount">0</TextField>
+<TextField id="Sch1ReturnDate[0]">20141015</TextField>
+<TextField id="Sch1class[0]">Ordinary</TextField>
+<TextField id="Sch1totalShares[0]">10000</TextField>
+<TableField id="Sch1allotteeTab[0]">
+<Row>
+<Column id="Sch1allotteeTab[0][0]">Ko Goo Jik Jackie</Column>
+<Column id="Sch1allotteeTab[0][1]">Flat A, 18/F, Fortune Mansion, 1 Cheung Sha Wan Road, Kln, HK</Column>
+<Column id="Sch1allotteeTab[0][2]">5000</Column>
+<Column id="Sch1allotteeTab[0][3]"/>
+<Column id="Sch1allotteeTab[0][4]"/>
+<Column id="Sch1allotteeTab[0][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[1][0]">Lee Fung Ying</Column>
+<Column id="Sch1allotteeTab[1][1]">G/F, 45 Green Lane, New York, USA</Column>
+<Column id="Sch1allotteeTab[1][2]">2000</Column>
+<Column id="Sch1allotteeTab[1][3]"/>
+<Column id="Sch1allotteeTab[1][4]"/>
+<Column id="Sch1allotteeTab[1][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[2][0]">South Profits Limited</Column>
+<Column id="Sch1allotteeTab[2][1]">Rm 2808-2810, 28/F, Happy Commercial Bldg, 1 Queen'sway, HK</Column>
+<Column id="Sch1allotteeTab[2][2]">1000</Column>
+<Column id="Sch1allotteeTab[2][3]"/>
+<Column id="Sch1allotteeTab[2][4]"/>
+<Column id="Sch1allotteeTab[2][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[3][0]">Richard Wealth (BVI) Limited</Column>
+<Column id="Sch1allotteeTab[3][1]">2 Woodland Street, Road Town, Queen's Road Central, HK</Column>
+<Column id="Sch1allotteeTab[3][2]">1000</Column>
+<Column id="Sch1allotteeTab[3][3]"/>
+<Column id="Sch1allotteeTab[3][4]"/>
+<Column id="Sch1allotteeTab[3][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[4][0]">Lee Ho Wan John</Column>
+<Column id="Sch1allotteeTab[4][1]">FLT A, 2/F, BLOCK 1, SUN TING GARDEN, 990 TAI PO RD, SHATIN, N.T., HK</Column>
+<Column id="Sch1allotteeTab[4][2]">1000</Column>
+<Column id="Sch1allotteeTab[4][3]"/>
+<Column id="Sch1allotteeTab[4][4]"/>
+<Column id="Sch1allotteeTab[4][5]"/>
+</Row>
+</TableField>
+<TextField id="Sch1ReturnDate[1]">20141015</TextField>
+<TextField id="Sch1class[1]">Ordinary</TextField>
+<TextField id="Sch1totalShares[1]">10000</TextField>
+<TableField id="Sch1allotteeTab[1]">
+<Row>
+<Column id="Sch1allotteeTab[0][0]">Li Bei Shu</Column>
+<Column id="Sch1allotteeTab[0][1]">Flat B, 2/F, Rich Mansion, 111 Full Moon Road, Fanling, N.T., HK</Column>
+<Column id="Sch1allotteeTab[0][2]">0</Column>
+<Column id="Sch1allotteeTab[0][3]">1000</Column>
+<Column id="Sch1allotteeTab[0][4]">20121225</Column>
+<Column id="Sch1allotteeTab[0][5]">Transferred to Lee Ho Wan John</Column>
+</Row>
+</TableField>
+<TextField id="Sch1ReturnDate[2]">20141015</TextField>
+<TextField id="Sch1class[2]">Preference</TextField>
+<TextField id="Sch1totalShares[2]">6000</TextField>
+<TableField id="Sch1allotteeTab[2]">
+<Row>
+<Column id="Sch1allotteeTab[0][0]">WONG TAI MAN</Column>
+<Column id="Sch1allotteeTab[0][1]">No. 391, 3/F., Lucky Building, 288 Nathan Road, Kln, HK</Column>
+<Column id="Sch1allotteeTab[0][2]">2000</Column>
+<Column id="Sch1allotteeTab[0][3]"/>
+<Column id="Sch1allotteeTab[0][4]"/>
+<Column id="Sch1allotteeTab[0][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[1][0]">Li Bei Shu</Column>
+<Column id="Sch1allotteeTab[1][1]">Flat B, 2/F, Rich Mansion, 111 Full Moon Road, Fanling, N.T., HK</Column>
+<Column id="Sch1allotteeTab[1][2]">2000</Column>
+<Column id="Sch1allotteeTab[1][3]"/>
+<Column id="Sch1allotteeTab[1][4]"/>
+<Column id="Sch1allotteeTab[1][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[2][0]">QualiSec Services Limited</Column>
+<Column id="Sch1allotteeTab[2][1]">Room 708, 7/F, Lucky Commercial Building, 2 Nathan Road, Kln, HK</Column>
+<Column id="Sch1allotteeTab[2][2]">1000</Column>
+<Column id="Sch1allotteeTab[2][3]"/>
+<Column id="Sch1allotteeTab[2][4]"/>
+<Column id="Sch1allotteeTab[2][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[3][0]">Ko Goo Jik Jackie</Column>
+<Column id="Sch1allotteeTab[3][1]">Flat A, 18/F, Fortune Mansion, 1 Cheung Sha Wan Road, Kln, HK</Column>
+<Column id="Sch1allotteeTab[3][2]">500</Column>
+<Column id="Sch1allotteeTab[3][3]"/>
+<Column id="Sch1allotteeTab[3][4]"/>
+<Column id="Sch1allotteeTab[3][5]"/>
+</Row>
+<Row>
+<Column id="Sch1allotteeTab[4][0]">Lee Fung Ying</Column>
+<Column id="Sch1allotteeTab[4][1]">G/F, 45 Green Lane, New York, USA</Column>
+<Column id="Sch1allotteeTab[4][2]">500</Column>
+<Column id="Sch1allotteeTab[4][3]"/>
+<Column id="Sch1allotteeTab[4][4]"/>
+<Column id="Sch1allotteeTab[4][5]"/>
+</Row>
+</TableField>
+<TextField id="Sch1ReturnDate[3]">20141015</TextField>
+<TextField id="Sch1class[3]">Preference</TextField>
+<TextField id="Sch1totalShares[3]">6000</TextField>
+<TableField id="Sch1allotteeTab[3]">
+<Row>
+<Column id="Sch1allotteeTab[0][0]">Law Woo</Column>
+<Column id="Sch1allotteeTab[0][1]">ROOM 8, NO.10 FU DONG YU ROAD, TIAN JIN, CHINA</Column>
+<Column id="Sch1allotteeTab[0][2]">0</Column>
+<Column id="Sch1allotteeTab[0][3]"/>
+<Column id="Sch1allotteeTab[0][4]"/>
+<Column id="Sch1allotteeTab[0][5]">Shares forfeited on 1/1/2013</Column>
+</Row>
+</TableField>
+<TextField id="Sch1ReturnDate[4]">20141015</TextField>
+<TextField id="Sch1class[4]">Redeemable</TextField>
+<TextField id="Sch1totalShares[4]">2000</TextField>
+<TableField id="Sch1allotteeTab[4]">
+<Row>
+<Column id="Sch1allotteeTab[0][0]">Ko Goo Jik Jackie</Column>
+<Column id="Sch1allotteeTab[0][1]">Flat A, 18/F, Fortune Mansion, 1 Cheung Sha Wan Road, Kln, HK</Column>
+<Column id="Sch1allotteeTab[0][2]">2000</Column>
+<Column id="Sch1allotteeTab[0][3]"/>
+<Column id="Sch1allotteeTab[0][4]"/>
+<Column id="Sch1allotteeTab[0][5]"/>
+</Row>
+</TableField>
+</Eform>
+"""
+
+import xml.etree.ElementTree as ET
+
+root = ET.fromstring(myString)
+
+print(root.tag)
+
+tree = ET.ElementTree(root)
+tree.write('aFile.xml')

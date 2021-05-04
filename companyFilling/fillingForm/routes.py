@@ -1,8 +1,8 @@
-from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort
+from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort, request
 from flask_login import login_user, current_user, logout_user, login_required
 from companyFilling.model import Company, Nar1data
 from companyFilling import db
-from companyFilling.fillingForm.forms import Nar1Form, AddCompany, aButton
+from companyFilling.fillingForm.forms import Nar1Form, AddCompany, aButton, CompanyInfo
 import os
 
 
@@ -28,8 +28,10 @@ def all_form(company_id):
         form = aButton()
         companyForm = Nar1data.query.filter_by(company_id=company_id)
 
-        if form.validate_on_submit():
+        #if form.validate_on_submit():
+        if request.form:
             return redirect(url_for('fillingForm.fill_nar1_form', company_id=selectedCompany.id))
+
         return render_template('addForm.html', form=form, companyForm=companyForm)
 
 
@@ -39,7 +41,7 @@ def fill_nar1_form(company_id):
     form = Nar1Form()
     if form.validate_on_submit():
         newNar1 = Nar1data(company_id=company_id, companyName=form.companyName.data,
-                       businessName=form.businessName.data, typeOfCompany=form.companyType.data,
+                       S2compName=form.S2compName.data, typeOfCompany=form.companyType.data,
                        date1=form.date1.data, financialStatementStartDate=form.financialStatementStartDate.data,
                        financialStatementEndDate=form.financialStatementEndDate.data, registeredOfficeAddress=form.registeredOfficeAddress.data,
                        emailAddress=form.emailAddress.data, mortgagesCharges=form.mortgagesCharges.data,
@@ -109,3 +111,28 @@ def edit_form(nar1_number):
             return redirect(url_for('fillingForm.home'))
 
         return render_template('nar1formTest.html', form=form)
+
+
+# @fillingForm.route("funding_account/<>", methods=['GET', "POST"])
+# @login_required
+# def funding_account():
+#     pass
+
+
+# @fillingForm.route('upload_form/nar1/<company_id>', methods=['POST'])
+# @login_required
+# def uploadNar1(company_id):
+#     file = request.files['inputFile']
+#
+#     newForm = Nar1pdf(name=file.filename, data=file.read(), company_id=company_id)
+#     db.session.add(newForm)
+#     db.session.commit()
+#
+#     return 'Saved already'
+
+
+@fillingForm.route("edit_company_info/<company_id>", methods=['GET', "POST"])
+@login_required
+def edit_company_info(company_id):
+    form = CompanyInfo()
+    return render_template("edit_company_info.html", form=form)
