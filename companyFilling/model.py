@@ -15,6 +15,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20))
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
+    ownedCompany = db.Column(db.Integer)
+
     companies = db.relationship('Company', backref='owner', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
@@ -37,10 +39,6 @@ class User(db.Model, UserMixin):
 class Company(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     companyName = db.Column(db.String(200))
-    companyAC = db.Column(db.String(200), nullable=True)
-    companyACpassword = db.Column(db.String(200), nullable=True)
-
-    #number_of_directors = db.Column(db.Integer)
 
     # The owner username of this company
     # this is a many in the table
@@ -61,10 +59,14 @@ class Director(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
 
-    name = db.Column(db.String(200))
-    idNumber = db.Column(db.String(200))
-    PassportCountry = db.Column(db.String(200))
-    PassportNum = db.Column(db.String(200))
+    directorNameInChinese = db.Column(db.String(200))
+    directorNameInEnglish = db.Column(db.String(300))
+    hkidCardNumber = db.Column(db.String(200))
+    directorEmail = db.Column(db.String(200))
+    passportIssuingCountry = db.Column(db.String(200))
+    passportNumber = db.Column(db.String(200))
+
+    companyOwnerID = db.Column(db.Integer)
 
     company = db.relationship("Company", backref=db.backref('directors', lazy='dynamic', collection_class=list))
 
