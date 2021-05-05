@@ -76,8 +76,6 @@ class Nar1Form(FlaskForm):
 class AddCompany(FlaskForm):
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=200)])
     submit = SubmitField('Submit')
-    companyAC = StringField("Company Account Name: (leave empty if don't currently have one)", validators=[validators.optional()])
-    companyACpassword = StringField("Company Account Password: (leave empty if don't currently have one)", validators=[validators.optional()])
 
 
 class aButton(FlaskForm):
