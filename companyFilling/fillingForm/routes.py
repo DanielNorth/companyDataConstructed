@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort, request
 from flask_login import login_user, current_user, logout_user, login_required
-from companyFilling.model import Company, Nar1data
+from companyFilling.model import Company, Nar1data, User
 from companyFilling import db
 from companyFilling.fillingForm.forms import Nar1Form, AddCompany, aButton, CompanyInfo
 import os
@@ -89,7 +89,13 @@ def add_new_company():
     if form.validate_on_submit():
         newCompany = Company(owner_id=current_user.id, companyName=form.companyName.data)
         db.session.add(newCompany)
+
+        # add one more company to the user ownCopmany data
+        current_user_id = current_user.id
+        user = User.query.filter_by(id=current_user_id).first()
+        user.ownedCompany += 1
         db.session.commit()
+
         return redirect(url_for('fillingForm.home'))
 
     return render_template('addCompanyName.html', form=form)
@@ -135,4 +141,4 @@ def edit_form(nar1_number):
 @login_required
 def edit_company_info(company_id):
     form = CompanyInfo()
-    return render_template("edit_company_info.html", form=form)
+    return render_template("edit_company_info.html", form=form, company_id=company_id)

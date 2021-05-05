@@ -11,14 +11,17 @@ changeDirector = Blueprint('changeDirector', __name__)
 @changeDirector.route('add_director/<company_id>', methods=['GET', "POST"])
 @login_required
 def add_director(company_id):
-    form = DirectorInfo()
+    company = Company.query.filter_by(id=company_id).first()
+    if company.owner_id != current_user.id:
+        abort(403)
 
+    form = DirectorInfo()
     if form.validate_on_submit():
         newDirector = Director(company_id=company_id, directorNameInChinese=form.directorNameInChinese.data,
                                directorNameInEnglish=form.directorNameInEnglish.data,
                                hkidCardNumber=form.hkidCardNumber.data,
                                directorEmail=form.directorEmail.data, passportIssuingCountry=form.passportIssuingCountry.data,
-                               passportNumber=form.passportNumber.data)
+                               passportNumber=form.passportNumber.data, companyOwnerID=current_user.id)
 
         db.session.add(newDirector)
         db.session.commit()
@@ -45,18 +48,18 @@ def remove_director(company_id):
     directors = Director.query.filter_by(company_id=company_id)
 
     director = Director.query.filter_by(company_id=company_id).first()
-    if current_user.id != director.company_id:
+    if current_user.id != director.companyOwnerID:
         abort(403)
 
     return render_template("removeDirector.html", directors=directors)
 
 
-@changeDirector.route("remove/<director_id>")
+@changeDirector.route("remove/d52f1ede214886927e7d9d7cc1b1ff67acf03d5b51187%t8991eee6fd5706863967a5/<director_id>")
 @login_required
 def remove(director_id):
     director = Director.query.filter_by(id=director_id).first()
 
-    if current_user.id != director.company_id:
+    if director.companyOwnerID != current_user.id:
         abort(403)
 
     from datetime import datetime
