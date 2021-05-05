@@ -7,7 +7,18 @@
 
 {% block content %}
 
+<form class="user" method="POST">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.directorNameInChinese) }}
+    {{ wtf.form_field(form.directorNameInEnglish) }}
+    {{ wtf.form_field(form.directorEmail) }}
+    {{ wtf.form_field(form.hkidCardNumber) }}
+    {{ wtf.form_field(form.passportIssuingCountry) }}
+    {{ wtf.form_field(form.passportNumber) }}
 
+    {{ wtf.form_field(form.submit) }}
+
+</form>
 
 
 

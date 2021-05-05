@@ -13,3 +13,5 @@ class DirectorInfo(FlaskForm):
     hkidCardNumber = StringField("HKID card number", validators=[InputRequired()])
     passportIssuingCountry = StringField("Passport issuing country")
     passportNumber = StringField("Password number", validators=[InputRequired()])
+
+    submit = SubmitField("Finish for now", render_kw={"onclick": "Are you sure you want to submit"})

@@ -55,8 +55,8 @@
         <div id="directorChange" class="collapse" aria-labelledby="a"
             data-parent="#abc">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item d-flex" href="{{ url_for('fillingForm.home') }}">Remove Director</a>
-                <a class="collapse-item" href="utilities-border.html">Add Director</a>
+                <a class="collapse-item d-flex" href="{{ url_for('changeDirector.remove_director', company_id=company_id) }}">Remove Director</a>
+                <a class="collapse-item" href="{{ url_for('changeDirector.add_director', company_id=company_id) }}">Add Director</a>
             </div>
         </div>
     </li>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Directos</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Director Chinese Name</th>
+                        <th>Director English Name</th>
+                        <th>Remove Director</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>Director Chinese Name </th>
+                        <th>Director English Name</th>
+                        <th>Remove Director</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+
+                {% for director in directors %}
+                <tr>
+                    <td>{{ director.directorNameInChinese }}</td>
+                    <td>{{ director.directorNameInEnglish }}</td>
+                    <td><a href="{{ url_for('changeDirector.remove', director_id=director.id) }}">Remove</a></td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
