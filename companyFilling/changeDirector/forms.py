@@ -9,6 +9,14 @@ from wtforms.validators import InputRequired, Length
 class DirectorInfo(FlaskForm):
     directorNameInChinese = StringField("New director's name in Chinese", validators=[InputRequired()])
     directorNameInEnglish = StringField("New director's name in English", validators=[InputRequired()])
+
+    previousChineseName = StringField("Previous name in Chinese", validators=[validators.optional()])
+    previousEnglishName = StringField("Previous name in English", validators=[validators.optional()])
+    chineseAlias = StringField("Alias in Chinese", validators=[validators.optional()])
+    englishAlias = StringField("Alias in English", validators=[validators.optional()])
+
+    directorCapacity = SelectField("Capacity", choices=["Company Secretary", "Director", "Alternate Director"])
+
     directorEmail = StringField("Director's email address", validators=[InputRequired()])
     hkidCardNumber = StringField("HKID card number", validators=[InputRequired()])
     passportIssuingCountry = StringField("Passport issuing country")

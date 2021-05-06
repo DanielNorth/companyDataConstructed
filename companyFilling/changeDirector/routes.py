@@ -4,6 +4,7 @@ from companyFilling.model import Company, Nar1data, Director
 from companyFilling import db
 from companyFilling.changeDirector.forms import DirectorInfo
 import os
+import uuid
 
 changeDirector = Blueprint('changeDirector', __name__)
 
@@ -33,13 +34,13 @@ Director English Name: {form.directorNameInEnglish.data}
 Director Chinese Name: {form.directorNameInChinese.data}
 Director Email: {form.directorEmail.data}
 """
-        with open(f"companyFilling/companyDirectorLog/{company_id}.txt", 'a') as file:
+        with open(f"companyFilling/companyDirectorChangeLog/{company_id}.txt", 'a') as file:
             file.write(message)
             file.write('\n')
 
         return redirect(url_for('fillingForm.home'))
 
-    return render_template("addDirector.html", form=form)
+    return render_template("changeDirector/addDirector.html", form=form)
 
 
 @changeDirector.route('remove_director/<company_id>', methods=['GET', "POST"])
@@ -51,12 +52,13 @@ def remove_director(company_id):
     if current_user.id != director.companyOwnerID:
         abort(403)
 
-    return render_template("removeDirector.html", directors=directors)
+    uuidKey = uuid.uuid4()
+    return render_template("changeDirector/removeDirector.html", directors=directors, uuidKey=uuidKey)
 
 
-@changeDirector.route("remove/d52f1ede214886927e7d9d7cc1b1ff67acf03d5b51187%t8991eee6fd5706863967a5/<director_id>")
+@changeDirector.route("remove/<uuid><director_id>")
 @login_required
-def remove(director_id):
+def remove(director_id, uuid):
     director = Director.query.filter_by(id=director_id).first()
 
     if director.companyOwnerID != current_user.id:
@@ -70,7 +72,7 @@ Director Chinese Name: {director.directorNameInChinese}
 Director Email: {director.directorEmail}
 """
 
-    with open(f"companyFilling/companyDirectorLog/{director.company_id}.txt", 'a') as file:
+    with open(f"companyFilling/companyDirectorChangeLog/{director.company_id}.txt", 'a') as file:
         file.write(message)
         file.write('\n')
 

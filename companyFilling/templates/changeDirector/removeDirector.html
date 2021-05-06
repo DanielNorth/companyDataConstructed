@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ director.directorNameInChinese }}</td>
                     <td>{{ director.directorNameInEnglish }}</td>
-                    <td><a href="{{ url_for('changeDirector.remove', director_id=director.id) }}">Remove</a></td>
+                    <td><a href="{{ url_for('changeDirector.remove', director_id=director.id, uuid=uuidKey) }}">Remove</a></td>
 
                 </tr>
 
