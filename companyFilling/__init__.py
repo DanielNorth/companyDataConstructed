@@ -38,6 +38,12 @@ def create_app():
     from companyFilling.homePage import homePage
     app.register_blueprint(homePage, url_prefix='/')
 
+    from companyFilling.changeDirector.routes import changeDirector
+    app.register_blueprint(changeDirector, url_prefix='/edit_director')
+
+    from companyFilling.companySecretary.routes import companySecretary
+    app.register_blueprint(companySecretary, url_prefix='/edit_company_secretary')
+
 
     from flask_admin.contrib.sqla import ModelView
     from flask_admin import Admin
@@ -48,4 +54,3 @@ def create_app():
 
 
     return app
-
