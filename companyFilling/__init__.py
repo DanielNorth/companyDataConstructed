@@ -44,6 +44,9 @@ def create_app():
     from companyFilling.companySecretary.routes import companySecretary
     app.register_blueprint(companySecretary, url_prefix='/edit_company_secretary')
 
+    from companyFilling.shareHolder.routes import shareHolder
+    app.register_blueprint(shareHolder, url_prefix='/share_holder')
+
 
     from flask_admin.contrib.sqla import ModelView
     from flask_admin import Admin
