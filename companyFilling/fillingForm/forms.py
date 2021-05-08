@@ -1,5 +1,5 @@
 from wtforms import StringField, SelectField, TextAreaField, SubmitField, \
-                    IntegerField, Form, FieldList, FormField
+                    IntegerField, Form, FieldList, FormField, BooleanField
 from wtforms.fields.html5 import DateField
 from flask_wtf import FlaskForm
 from wtforms import validators
@@ -75,6 +75,8 @@ class Nar1Form(FlaskForm):
 
 class AddCompany(FlaskForm):
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=200)])
+    typeOfCompany = SelectField("Type of company", choices=["Private Company", "Public Company",
+                                                            "Company limited by guarantee"])
     submit = SubmitField('Submit')
 
 
@@ -100,11 +102,25 @@ class ShareCapital(Form):
 class CompanyInfo(FlaskForm):
     companyName = StringField('Company Name: ', validators=[InputRequired(), Length(min=4, max=300)])
     businessName = StringField("Business Name(if any):", validators=[validators.optional()])
+    companyNumber = StringField("Company Number", validators=[validators.Optional()])
     submit = SubmitField("Finish for now", render_kw={"onclick": "Are you sure you want to submit"})
 
+    typeOfCompany = SelectField("Type of company", choices=["Private Company", "Public Company",
+                                                            "Company limited by guarantee"])
+
+    addressOfRegisteredOffice1 = StringField("Address of registered office", validators=[validators.Optional()])
+    addressOfRegisteredOffice2 = StringField("Address of registered office", validators=[validators.Optional()])
+    addressOfRegisteredOffice3 = StringField("Address of registered office", validators=[validators.Optional()])
+    addressOfRegisteredOfficeRegion = StringField("Region", validators=[validators.Optional()])
+    companyEmail = StringField("Email Address", validators=[validators.Optional()])
+
+
     nonShareHolder = IntegerField("Number of Member(s) of a Company Not Having a Share Capital", validators=[validators.optional()])
-    shares_issued = IntegerField("Number of shares issued")
+    shares_issued = IntegerField("Total Number of shares issued")
 
     number_of_directors = IntegerField('Number of director(s)', [validators.NumberRange(min=0, max=50)])
     director = FieldList(FormField(Director), min_entries=0, max_entries=20)
-    shareCapital = FieldList(FormField(ShareCapital), min_entries=0)
+    #shareCapital = FieldList(FormField(ShareCapital), min_entries=0)
+
+    registeredOfficeAddress = StringField("Address of Registered Office", validators=[validators.optional()])
+
