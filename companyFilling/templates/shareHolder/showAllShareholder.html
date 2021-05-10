@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All shareholders</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Share Class</th>
+                    <th>Total Shares</th>
+                    <th>Address</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+
+                    <th>Name </th>
+                    <th>Share Class</th>
+                    <th>Total Shares</th>
+                    <th>Address</th>
+                    <th>Edit</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for shareHolder in shareHolders %}
+
+                <tr>
+                    <td>{{shareHolder.name}}</td>
+                    <td>{{ shareHolder.shareClass }}</td>
+                    <td>{{ shareHolder.totalShares }}</td>
+                    <td>{{ shareHolder.address }}</td>
+                    <td><a href="{{ url_for('shareHolder.edit_shareholder', shareHolder_id=shareHolder.id, company_id=company_id) }}">Edit</a></td>
+
+                </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+
+
+{% endblock %}

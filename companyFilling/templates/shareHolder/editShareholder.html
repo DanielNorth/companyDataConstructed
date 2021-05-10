@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.name) }}
+
+    {% for share_class in share_classes %}
+        <input type="radio" name="shareOfClass" value="{{ share_class }}"> {{ share_class }}<br>
+    {% endfor %}
+    <input type="radio" name="shareOfClass" value=""> Other class <input type="text" name="other_class" />
+
+
+    {{ wtf.form_field(form.totalShares) }}
+    {{ wtf.form_field(form.address) }}
+
+    {{ wtf.form_field(form.submit) }}
+</form>
+
+
+{% endblock %}
