@@ -14,7 +14,8 @@
                     <tr>
                         <th>Director Chinese Name</th>
                         <th>Director English Name</th>
-                        <th>Remove Director</th>
+                        <th>Resign</th>
+                        <th>Resign</th>
                     </tr>
                 </thead>
 
@@ -22,7 +23,8 @@
                     <tr>
                         <th>Director Chinese Name </th>
                         <th>Director English Name</th>
-                        <th>Remove Director</th>
+                        <th>Resign</th>
+                        <th>Remove Director Form</th>
                     </tr>
                 </tfoot>
 
@@ -31,8 +33,9 @@
                 {% for director in directors %}
                 <tr>
                     <td>{{ director.directorNameInChinese }}</td>
-                    <td>{{ director.directorNameInEnglish }}</td>
-                    <td><a href="{{ url_for('changeDirector.remove', director_id=director.id, uuid=uuidKey) }}">Remove</a></td>
+                    <td>{{ director.directorOtherName }} {{director.directorSurname}}</td>
+                    <td><a href="{{ url_for('changeDirector.resign', director_id=director.id, uuid=uuidKey) }}">Resign</a></td>
+                    <td><a>Form</a></td>
 
                 </tr>
 
