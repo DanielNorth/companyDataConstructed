@@ -17,7 +17,7 @@ class DirectorInfo(FlaskForm):
     englishAlias = StringField("Alias in English", validators=[validators.optional()])
 
     directorEmail = StringField("Director's email address", validators=[validators.optional()])
-    hkidCardNumber = StringField("HKID card number", validators=[validators.optional()])
+    hkidCardNumber = StringField("HKID card number", validators=[validators.optional(), Length(max=8)])
     passportIssuingCountry = StringField("Passport issuing country", validators=[validators.optional()])
     passportNumber = StringField("Password number", validators=[validators.optional()])
 

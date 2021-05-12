@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{ director.directorNameInChinese }}</td>
                     <td>{{ director.directorOtherName }} {{director.directorSurname}}</td>
-                    <td><a href="{{ url_for('changeDirector.resign', director_id=director.id, uuid=uuidKey) }}">Resign</a></td>
+                    <td><a href="{{ url_for('changeDirector.resign', director_id=director.id) }}">Resign</a></td>
                     <td><a>Form</a></td>
 
                 </tr>

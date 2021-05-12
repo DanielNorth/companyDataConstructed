@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, send_file, Blueprin
 from flask_login import login_user, current_user, logout_user, login_required
 from companyFilling.model import Company, Nar1data, Director, TestDB
 from companyFilling import db
-from companyFilling.changeDirector.forms import DirectorInfo, Test, DirectorInfo1
+from companyFilling.changeDirector.forms import DirectorInfo, Test
 import os
 import uuid
 
@@ -94,27 +94,29 @@ def remove_director(company_id):
         abort(403)
 
     uuidKey = uuid.uuid4()
-    return render_template("changeDirector/removeDirector.html", directors=directors, uuidKey=uuidKey)
+    return render_template("changeDirector/removeDirector.html", directors=directors)
 
 
-@changeDirector.route("remove/<uuid><director_id>")
+@changeDirector.route("remove/<director_id>")
 @login_required
-def resign(director_id, uuid):
+def resign(director_id):
     director = Director.query.filter_by(id=director_id).first()
+    company = Company.query.filter_by(id=director.company_id).first()
 
-    if director.companyOwnerID != current_user.id:
+    if company.owner_id != current_user.id:
         abort(403)
 
     from datetime import datetime
     now = datetime.now()
     message = f"""Date resign: {now.strftime("%d %B, %Y")}
-Director English Name: {director.directorNameInEnglish}
+Director English Name: {director.directorOtherName} {director.directorSurname}
 Director Chinese Name: {director.directorNameInChinese}
 Director Email: {director.directorEmail}
 """
-    company = Director.query.filter_by(company_id=director.company_id).first()
 
-    if director.companyOrPerson == "Natural Person":
+
+    xml = ""
+    if director.companyOrPerson == "Natural Person" and director.capacity == "Director":
         xml = f"""<Eform xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CR-Format.xsd" id="ND4">
     <TextField id="language">E</TextField>
     <TextField id="hiddenCompNo">{company.companyNumber}</TextField>
@@ -130,22 +132,83 @@ Director Email: {director.directorEmail}
     <TextField id="S2PPTNo">{director.passportNumber}</TextField>
     <TextField id="S2corpChnName"/>
     <TextField id="S2corpEngName"/>
-    <TextField id="S2ResignDate">20131018</TextField>
+    <TextField id="S2ResignDate">{now.strftime("%Y%m%d")}</TextField>
     <TextField id="S2cessContGroup">S2cessContGroup2</TextField>
     <TextField id="S2corpCompNo"/>
     <TextField id="S3regNoticeGroup">S3regNoticeGroup1</TextField>
     <TextField id="nameCRNo">{director.directorNameInChinese}##{director.directorSurname}, {director.directorOtherName}##</TextField>
     <TextField id="signatoryCRNo"/>
     <TextField id="nameCapacity">{director.directorNameInChinese}##{director.directorSurname}, {director.directorOtherName}##D</TextField>
-    <TextField id="signCapacity">{director.cap}</TextField>
+    <TextField id="signCapacity">{director.capacity}</TextField>
     <TextField id="signName">{director.directorSurname}, {director.directorOtherName}</TextField>
-    <TextField id="signDate">20131018</TextField>
+    <TextField id="signDate">{now.strftime("%Y%m%d")}</TextField>
     </Eform>
         """
-    elif director.companyOrPerson == "Corporate":
-        xml = f"""
+    elif director.companyOrPerson == "Natural Person" and director.capacity == "AlternateDirector":
+        xml = f"""<Eform xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CR-Format.xsd" id="ND4">
+    <TextField id="language">E</TextField>
+    <TextField id="hiddenCompNo">{company.companyNumber}</TextField>
+    <TextField id="compName">{company.companyName} </TextField>
+    <TextField id="S2CapacityGroup1">false</TextField>
+    <TextField id="S2CapacityGroup2">false</TextField>
+    <TextField id="S2CapacityGroup3">true</TextField>
+    <TextField id="S2alternateTo">{director.alternateTo}</TestField>
+    <TextField id="S2chnName">{director.directorNameInChinese}</TextField>
+    <TextField id="S2engSurname">{director.directorSurname}</TextField>
+    <TextField id="S2engOthName">{director.directorOtherName}</TextField>
+    <TextField id="S2HKID">{director.hkidCardNumber}</TextField>
+    <TextField id="S2PPTNo">{director.passportNumber}</TextField>
+    <TextField id="S2corpChnName"/>
+    <TextField id="S2corpEngName"/>
+    <TextField id="S2ResignDate">{now.strftime("%Y%m%d")}</TextField>
+    <TextField id="S2cessContGroup">S2cessContGroup2</TextField>
+    <TextField id="S2corpCompNo"/>
+    <TextField id="S3regNoticeGroup">S3regNoticeGroup1</TextField>
+    <TextField id="nameCRNo">{director.directorNameInChinese}##{director.directorSurname}, {director.directorOtherName}##</TextField>
+    <TextField id="signatoryCRNo"/>
+    <TextField id="nameCapacity">{director.directorNameInChinese}## {director.directorSurname}, {director.directorOtherName}##D</TextField>
+    <TextField id="signCapacity">{director.capacity}</TextField>
+    <TextField id="signName">{director.directorSurname}, {director.directorOtherName}</TextField>
+    <TextField id="signDate">{now.strftime("%Y%m%d")}</TextField>
+    </Eform>
         """
 
+    elif director.companyOrPerson == "Corporate" and director.capacity=="Director":
+        xml = f"""<Eform xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CR-Format.xsd" id="ND4">
+            <TextField id="language">E</TextField>
+            <TextField id="hiddenCompNo">{company.companyNumber}</TextField>
+            <TextField id="compName">{company.companyName} </TextField>
+            <TextField id="S2CapacityGroup1">false</TextField>
+            <TextField id="S2CapacityGroup2">true</TextField>
+            <TextField id="S2CapacityGroup3">false</TextField>
+            <TextField id="S2alternateTo"/>
+            <TextField id="S2chnName"/>
+            <TextField id="S2engSurname"/>
+            <TextField id="S2engOthName"/>
+            <TextField id="S2HKID"/>
+            <TextField id="S2PPTNo"/>
+            <TextField id="S2corpChnName">{director.directorNameInChinese}</TextField>
+            <TextField id="S2corpEngName">{director.directorOtherName}</TextField>
+            <TextField id="S2ResignDate">{now.strftime("%Y%m%d")}</TextField>
+            <TextField id="S2cessContGroup">S2cessContGroup2</TextField>
+            <TextField id="S2corpCompNo">{director.companyNumber}</TxtField>
+            <TextField id="S3regNoticeGroup">S3regNoticeGroup1</TextField>
+            <TextField id="nameCRNo">{director.directorNameInChinese}## {director.directorOtherName}##</TextField>
+            <TextField id="signatoryCRNo"/>
+            <TextField id="nameCapacity">{director.directorNameInChinese}## {director.directorOtherName}##D</TextField>
+            <TextField id="signCapacity">{director.capacity}</TextField>
+            <TextField id="signName">{director.directorOtherName}</TextField>
+            <TextField id="signDate">{now.strftime("%Y%m%d")}</TextField>
+            </Eform>
+        """
+    import xml.etree.ElementTree as ET
+
+    root = ET.fromstring(xml)
+    tree = ET.ElementTree(root)
+    tree.write(f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
+
+    #from companyFilling.changeDirector.utils import send_d4_xml_email
+    #send_d4_xml_email(company.companyName, f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
 
 
     with open(f"companyFilling/companyDirectorChangeLog/{director.company_id}.txt", 'a') as file:
@@ -155,7 +218,7 @@ Director Email: {director.directorEmail}
     Director.query.filter_by(id=director_id).delete()
     db.session.commit()
 
-    return redirect(url_for("fillingForm.edit_company_info"))
+    return redirect(url_for("fillingForm.edit_company_info", company_id=company.id))
 
 
 @changeDirector.route("remove/form/<director_id>")
