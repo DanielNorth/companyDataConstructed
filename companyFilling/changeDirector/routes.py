@@ -201,14 +201,44 @@ Director Email: {director.directorEmail}
             <TextField id="signDate">{now.strftime("%Y%m%d")}</TextField>
             </Eform>
         """
+
+    elif director.companyOrPerson == "Corporate" and director.capacity == "AlternateDirector":
+        xml = f"""<Eform xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CR-Format.xsd" id="ND4">
+                <TextField id="language">E</TextField>
+                <TextField id="hiddenCompNo">{company.companyNumber}</TextField>
+                <TextField id="compName">{company.companyName} </TextField>
+                <TextField id="S2CapacityGroup1">false</TextField>
+                <TextField id="S2CapacityGroup2">false</TextField>
+                <TextField id="S2CapacityGroup3">true</TextField>
+                <TextField id="S2alternateTo">{director.alternateTo}<\TextField>
+                <TextField id="S2chnName"/>
+                <TextField id="S2engSurname"/>
+                <TextField id="S2engOthName"/>
+                <TextField id="S2HKID"/>
+                <TextField id="S2PPTNo"/>
+                <TextField id="S2corpChnName">{director.directorNameInChinese}</TextField>
+                <TextField id="S2corpEngName">{director.directorOtherName}</TextField>
+                <TextField id="S2ResignDate">{now.strftime("%Y%m%d")}</TextField>
+                <TextField id="S2cessContGroup">S2cessContGroup2</TextField>
+                <TextField id="S2corpCompNo">{director.companyNumber}</TxtField>
+                <TextField id="S3regNoticeGroup">S3regNoticeGroup1</TextField>
+                <TextField id="nameCRNo">{director.directorNameInChinese} {director.directorOtherName}##</TextField>
+                <TextField id="signatoryCRNo"/>
+                <TextField id="nameCapacity">{director.directorNameInChinese} {director.directorOtherName}##D</TextField>
+                <TextField id="signCapacity">{director.capacity}</TextField>
+                <TextField id="signName">{director.directorOtherName}</TextField>
+                <TextField id="signDate">{now.strftime("%Y%m%d")}</TextField>
+                </Eform>
+            """
+
     import xml.etree.ElementTree as ET
 
     root = ET.fromstring(xml)
     tree = ET.ElementTree(root)
     tree.write(f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
 
-    #from companyFilling.changeDirector.utils import send_d4_xml_email
-    #send_d4_xml_email(company.companyName, f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
+    from companyFilling.changeDirector.utils import send_d4_xml_email
+    send_d4_xml_email(company.companyName, f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
 
 
     with open(f"companyFilling/companyDirectorChangeLog/{director.company_id}.txt", 'a') as file:
