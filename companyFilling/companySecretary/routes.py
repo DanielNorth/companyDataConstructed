@@ -13,4 +13,13 @@ companySecretary = Blueprint("companySecretary", __name__)
 @login_required
 def change_secretary():
     form = SecretaryInfo()
+
     return render_template("changeSecretary/newSecretary.html", form=form)
+
+
+@companySecretary.route("add_secretary/<company_id>", methods=["POST", "GET"])
+def add_secretary(company_id):
+    form = SecretaryInfo()
+
+    #return render_template("changeSecretary/newSecretary.html", form=form)
+    return render_template('changeSecretary/newSecretary.html', form=form)
