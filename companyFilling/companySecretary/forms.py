@@ -7,7 +7,7 @@ from companyFilling.model import User
 
 
 class SecretaryInfo(FlaskForm):
-    nameInChinese = StringField("Name in Chinese:", validators=[validators.required()])
+    nameInChinese = StringField("Name in Chinese:", validators=[validators.optional()])
     englishGivenName = StringField("English Given name:", validators=[validators.optional()])
     englishName = StringField("English name", validators=[validators.optional()])
     previousChineseName = StringField("Previous Chinese name", validators=[validators.optional()])
@@ -23,11 +23,12 @@ class SecretaryInfo(FlaskForm):
     email = StringField("Email Address", validators=[validators.optional()])
     companyName = StringField("Company Name", validators=[validators.optional()])
 
-    address1 = StringField("Company Address Line 1:", validators=[validators.optional()])
-    address2 = StringField("Company Address Line 2:", validators=[validators.optional()])
-    address3 = StringField("Company Address Line 3:", validators=[validators.optional()])
+    address1 = StringField("Address Line 1:", validators=[validators.optional()])
+    address2 = StringField("Address Line 2:", validators=[validators.optional()])
+    address3 = StringField("Address Line 3:", validators=[validators.optional()])
 
-    companyOrPerson = SelectField("Nature Person or body Corporate", choices=["Natural Person", "Body Corporate"])
+    corporate = SelectField("Secretary Info", choices=["Corporate"], validators=[validators.optional()])
+    naturalPerson = SelectField("Secretary Info", choices=["Natural Person"], validators=[validators.optional()])
 
     submit = SubmitField("Submit")
 
