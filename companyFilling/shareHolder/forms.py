@@ -22,3 +22,13 @@ class ShareTransferForm(FlaskForm):
     transferDate = DateField('Date of transfer', format='%Y-%m-%d', validators=[validators.Optional()])
 
     submit = SubmitField("Submit")
+
+
+class ShareCapitalForm(FlaskForm):
+    totalNumber = StringField("Total number of share", validators=[InputRequired()])
+    currency = SelectField("Currency", choices=["USD", "HKD", "EUR", "JPY", "GBP", "AUD", "CAD", "CNY", "CHF",
+                                                "NZD", "SEK", "KRW", "SGD", "NOK", "MXN", "INR", "RUB", "ZAR"])
+    totalAmount = StringField("Total Amount")
+    totalPaidUp = StringField("Total Paid up or Registered as Paid up")
+
+    submit = SubmitField("Submit")
