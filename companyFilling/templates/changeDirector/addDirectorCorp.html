@@ -12,6 +12,10 @@
     <input type="radio" name="reason" value="Director">Director<br>
     <input type="radio" name="reason" value="AlternateDirector">Alternate Director <input type="text" name="alternateTo" placeholder="Alternate to"/>
 
+    {{ wtf.form_field(form.address1) }}
+    {{ wtf.form_field(form.address2) }}
+    {{ wtf.form_field(form.address3) }}
+
     {{ wtf.form_field(form.directorEmail) }}
     {{ wtf.form_field(form.companyNumber) }}
 
