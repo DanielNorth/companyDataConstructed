@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--bootstrap 5-->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+		<!--This is the board resolution for the scnario where there is change of direcotrs / company secretary-->
+		<title>Board Resolution</title>
+	</head>
+	<body>
+		<div class="container text-center">
+			<br>
+			<!--Please use the company name, place holder here for this h2 tag-->
+			<h1>{{Company Name}}</h1>
+			<p><i>(Incorporated in Hong Kong with limited liability)</i>
+				<br>
+				<i>(the "<b>Company</b>")</i>
+			</p>
+		</div>
+
+		<div class="container text-center">
+			<p>RESOLUTIONS IN WRITING OF THE DIRECTOR(S) PASSED PURUSANT TO THE ARTICLES OF ASSOCIATION OF THE COMPANY
+			</p>
+			<!--Please note {{date_passed_resolution}} needs to be a date when this resolution is passed-->
+			<p>DATED {{date_passed_resolution}}</p>
+			<hr>
+		</div>
+
+		<div class="container">
+			<p>
+				The undersigned, being the director(s) of the Company (the "<b>Director(s)</b>", and each individually a "<b>Director</b>") hereby take the following actions and consent to the passing of the following resolutions:
+			</p>
+		</div>
+		<!--Here begins the resolutions-->
+		<div class="container">
+			<ol>
+				<li><b>DIRECTORS' INTEREST</b></li>
+				<p>IT IS NOTED THAT the Director(s) by their signatures below confirm that they haave declared their interest (if any) in relation to the matters as described below in the manner required by the articles of association of the Company and the Companies Ordinance (Cap. 622)</p>
+				<!--This is for the resignation of directors/ Company Secretary, please input the name-->
+				<li><b>RESIGNATION OF DIRECTOR(s)</b></li>
+				<p>IT IS NOTED THAT {{Resigning_Dir_NAME(S)}} (the "<b>Resigning Director(s)</b>") has tendered his resignation as Director of the Company with effect from {{date_passed_resolution}} (the "<b>Effective Date</b>")</p>
+				<p>IT IS RESOLVED THAT:
+					<ol type="a">
+						<li>the resignation of Resigning Director(s) as Director of the Company with effect from the Effective Date be accepted; and</li>
+						<li>the Resigning Director be removed as an authorised signatory (if applicable) of all banks accounts of the Company with effect from the Effective Date.</li>
+					</ol>
+				</p>
+				<li><b>APPOINTMENT OF DIRECTOR(s)</b></li>
+				<!--New Directors are contained here in the {{New_Directors}}-->
+				<p>IT IS NOTED THAT it is proposed that the Company appoints the following persons:{{New_Directors}} (each a "<b>New Director</b>"), as new director(s) of the Company with effect from the Effective Date.</p>
+				<p>IT IS RESOLVED THAT:
+					<ol type="a">
+						<li>with effect from the Effective Date, each New Director, having consented so to act, be appointed as a director of the Company.</li>
+					</ol>
+				</p>
+
+				<li><b>GENERAL AUTHORISATION</b></li>
+				<p>IT IS RESOLVED THAT:
+					<ol type="a">
+						<li>all the relevant registers, including but not limited to register of directors and register of company secretary, shall be updated accordingly.</li>
+						<li>in connection with foregoing resolutions, each Director be, and such other persons as authorized by any Director be,  authorized in the name and on behalf of the Company, to do such further things as such Director deems necessary or appropriate, including but not limited to do and perform (or caused to be done and performed), in the name and on behalf of the Company, all such acts and to sign, make, execute, deliver issue or file (or cause to be signed, made, executed, delivered, issued or filed) with any person including any governmental authority or agency, all such agreements, documents, instruments, certificates, consents or waivers and to pay, or cause to be paid, all such payments, as any of them may deem necessary or advisable in order to carry out the intent of the above resolutions, the authority for the doing of any such things and the signing, making, execution, delivery, issue and filing of such of the foregoing to be conclusively evidenced hereby; and</li>
+						<li>any and all actions of the Company, or of any Director, taken in connection with the actions contemplated by the foregoing resolutions prior to the execution hereof be and are hereby ratified, confirmed, approved and adopted in all respects as are fully as if such action(s) had been presented to for approval and approved by, the board of directors of the Company prior to such action being taken.</li>
+					</ol>
+				</ol>
+				<p class="text-center"><i>(To be followed by signatures of all Director(s))</i></p>
+				<!--Here, we make signatures block for each director. Consider we may replace it with e-signature. Note that the number of signatures block depend on the number of directors-->
+				<div class="container">
+					<br><br>
+					<p>_______________________________________</p>
+					<!--Note: Existing Directors-->
+					<p><b>{{Directors_NAME}}</b>
+						<br>
+						Director
+					</p>
+				</div>
+			</div>
+		<ul></ul>
+	</body>
+</html>
