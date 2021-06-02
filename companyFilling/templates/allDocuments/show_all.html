@@ -4,7 +4,77 @@
 
 {% block content %}
 
-{{ all_directors }}
+<!-- Heading -->
+<div class="container-fluid">
 
+
+<ul class="sidebar-dark accordion no-arrow" id="abc">
+    <li style="font-size:30px" class="nav-item">
+        <a class="collapsed" href="#" data-toggle="collapse" data-target="#companyName"
+           aria-expanded="true" aria-controls="companyName">
+            <i class="fas fa-fw fa-cog"></i>
+            <span style="color:gray">Company Name</span>
+        </a>
+        <div id="companyName" class="collapse" aria-labelledby="headingTwo" data-parent="#abc">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="a.html">Change company name</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - shares change Collapse Menu -->
+    <li style="font-size:30px" class="nav-item">
+        <a class="collapsed" href="#" data-toggle="collapse" data-target="#sharesChange"
+           aria-expanded="true" aria-controls="sharesChange">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span style="color:gray">Shares Change</span>
+        </a>
+        <div id="sharesChange" class="collapse" aria-labelledby="a"
+             data-parent="#abc">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item d-flex" href="{{ url_for('shareHolder.add_existing_shareholder', company_id=company_id, hash=hash)}}">Add existing shareholder</a>
+                <a class="collapse-item d-flex" href="{{ url_for('fillingForm.home') }}">Issue new shares</a>
+                <a class="collapse-item d-flex" href="{{ url_for('shareHolder.show_shareholder', company_id=company_id) }}">Edit/View shareholder information</a>
+                <a class="collapse-item d-flex" href="{{ url_for('shareHolder.transfer_share', company_id=company_id) }}">Transfer shares</a>
+                <a class="collapse-item d-flex" href="{{ url_for('shareHolder.share_capital', company_id=company_id) }}">Add share capital Info</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - shares change Collapse Menu -->
+    <li style="font-size:30px" class="nav-item">
+        <a class="collapsed" href="#" data-toggle="collapse" data-target="#directorChange"
+            aria-expanded="true" aria-controls="directorChange">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span style="color:gray">Director</span>
+        </a>
+        <div id="directorChange" class="collapse" aria-labelledby="a"
+            data-parent="#abc">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item d-flex" href="{{ url_for('allDocuments.show_director_change_board_res', company_id=company_id) }}">Replace/Remove Director Board Resolution</a>
+                <a class="collapse-item d-flex" href="{{ url_for('changeDirector.add_director', company_id=company_id) }}">Add Director (Natural person)</a>
+                <a class="collapse-item d-flex" href="{{ url_for('changeDirector.add_director_corp', company_id=company_id) }}">Add Director (Body Corporate)</a>
+                <a class="collapse-item d-flex" href="#">Edit Director Info</a>
+            </div>
+        </div>
+    </li>
+
+    <li style="font-size:30px" class="nav-item">
+        <a class="collapsed" href="#" data-toggle="collapse" data-target="#companySecretary"
+            aria-expanded="true" aria-controls="companySecretary">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span style="color:gray">Company Secretary</span>
+        </a>
+        <div id="companySecretary" class="collapse" aria-labelledby="a"
+            data-parent="#abc">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item d-flex" href="{{ url_for('companySecretary.add_secretary', company_id=company_id) }}">Change/Add Company Secretary</a>
+                <a class="collapse-item d-flex" href="">Edit Secretary Info</a>
+            </div>
+        </div>
+    </li>
+</ul>
+
+</div>
 
 {% endblock %}

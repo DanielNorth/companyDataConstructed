@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+
+a:link, a:visited {
+    color: black;
+}
+
+.notbold{
+    font-weight:normal
+}​
+
+</style>
+
 	<head>
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
@@ -13,7 +25,7 @@
 		<div class="container text-center">
 			<br>
 			<!--Please use the company name, place holder here for this h2 tag-->
-			<h1>{{Company Name}}</h1>
+			<h1>{{ info.companyName}}</h1>
 			<p><i>(Incorporated in Hong Kong with limited liability)</i>
 				<br>
 				<i>(the "<b>Company</b>")</i>
@@ -24,7 +36,7 @@
 			<p>RESOLUTIONS IN WRITING OF THE DIRECTOR(S) PASSED PURUSANT TO THE ARTICLES OF ASSOCIATION OF THE COMPANY
 			</p>
 			<!--Please note {{date_passed_resolution}} needs to be a date when this resolution is passed-->
-			<p>DATED {{date_passed_resolution}}</p>
+			<p>DATED {{ info.date_passed_resolution }}</p>
 			<hr>
 		</div>
 
@@ -40,7 +52,7 @@
 				<p>IT IS NOTED THAT the Director(s) by their signatures below confirm that they haave declared their interest (if any) in relation to the matters as described below in the manner required by the articles of association of the Company and the Companies Ordinance (Cap. 622)</p>
 				<!--This is for the resignation of directors/ Company Secretary, please input the name-->
 				<li><b>RESIGNATION OF DIRECTOR(s)</b></li>
-				<p>IT IS NOTED THAT {{Resigning_Dir_NAME(S)}} (the "<b>Resigning Director(s)</b>") has tendered his resignation as Director of the Company with effect from {{date_passed_resolution}} (the "<b>Effective Date</b>")</p>
+				<p>IT IS NOTED THAT {{ info.resignDirector }} (the "<b>Resigning Director(s)</b>") has tendered his resignation as Director of the Company with effect from {{date_passed_resolution}} (the "<b>Effective Date</b>")</p>
 				<p>IT IS RESOLVED THAT:
 					<ol type="a">
 						<li>the resignation of Resigning Director(s) as Director of the Company with effect from the Effective Date be accepted; and</li>
@@ -49,7 +61,7 @@
 				</p>
 				<li><b>APPOINTMENT OF DIRECTOR(s)</b></li>
 				<!--New Directors are contained here in the {{New_Directors}}-->
-				<p>IT IS NOTED THAT it is proposed that the Company appoints the following persons:{{New_Directors}} (each a "<b>New Director</b>"), as new director(s) of the Company with effect from the Effective Date.</p>
+				<p>IT IS NOTED THAT it is proposed that the Company appoints the following persons:{{info.newDirector}} (each a "<b>New Director</b>"), as new director(s) of the Company with effect from the Effective Date.</p>
 				<p>IT IS RESOLVED THAT:
 					<ol type="a">
 						<li>with effect from the Effective Date, each New Director, having consented so to act, be appointed as a director of the Company.</li>
@@ -66,15 +78,29 @@
 				</ol>
 				<p class="text-center"><i>(To be followed by signatures of all Director(s))</i></p>
 				<!--Here, we make signatures block for each director. Consider we may replace it with e-signature. Note that the number of signatures block depend on the number of directors-->
+				{% for director in directors %}
 				<div class="container">
 					<br><br>
-					<p>_______________________________________</p>
+					{% set imageLink = 'img/directorSignature/' + uuid + director.id|string + '.png' %}
+					<img src="{{url_for('static', filename=imageLink, _external=True) }}" width="580" height="130">
+					<p>_________________________________________________</p>
 					<!--Note: Existing Directors-->
-					<p><b>{{Directors_NAME}}</b>
+					<p><b>{% if director.companyOrPerson == "Corporate" %}
+								<a href="{{ url_for('allDocuments.sign_board_resolution', uuid=uuid, director_id=director.id)}}" style="text-decoration:none"><span class="notbold">{{ director.directorOtherName }}</span></a>
+							{% else %}
+								<a href="{{ url_for('allDocuments.sign_board_resolution', uuid=uuid, director_id=director.id)}}" style="text-decoration:none"><span class="notbold">{{ director.directorOtherName }} {{ director.directorSurname }}</span></a>
+							{% endif %}
+					</b>
 						<br>
-						Director
+						{% if director.capacity == "AlternateDirector" %}
+							Alternate Director
+						{% else %}
+							Director
+						{% endif %}
+						{{director.id}}
 					</p>
 				</div>
+				{% endfor %}
 			</div>
 		<ul></ul>
 	</body>

@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Directos</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Date Created</th>
+                        <th>View signature</th>
+                        <th>View Pdf</th>
+                        <th>Send email</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>Date Created</th>
+                        <th>View signature</th>
+                        <th>View Pdf</th>
+                        <th>Send email</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+
+                {% for director in directors %}
+                <tr>
+                    <td>{{ director.date_passed_resolution }}</td>
+                    <td><a href="{{ url_for('allDocuments.director_change_board_resolution', uuid=director.uuid) }}">View Signature</a></td>
+                    <td><a href="{{ url_for('allDocuments.view_board_resolution', uuid=director.uuid)}}">View PDF</a></td>
+                    <td><a href="">Send</a></td>
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
