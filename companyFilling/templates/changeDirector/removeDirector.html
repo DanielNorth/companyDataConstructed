@@ -35,9 +35,13 @@
                 {% for director in directors %}
                 <tr>
                     <td>{{ director.directorNameInChinese }}</td>
-                    <td>{{ director.directorOtherName }} {{director.directorSurname}}</td>
+                    {% if director.directorSurname is none %}
+                        <td>{{ director.directorOtherName }}</td>
+                    {% else %}
+                        <td>{{ director.directorOtherName }} {{director.directorSurname}}</td>
+                    {% endif %}
                     <td><a href="{{ url_for('changeDirector.resign', director_id=director.id) }}">Resign</a></td>
-                    <td><a href="{{ url_for('changeDirector.remove_director_board_resolution', company_id=company_id, director_id=director.id) }}">Replace</a></td>
+                    <td><a href="{{ url_for('changeDirector.replace_director', company_id=company_id, director_id=director.id) }}">Replace</a></td>
                     <td><a href="{{ url_for('changeDirector.remove_director_board_resolution', company_id=company_id, director_id=director.id) }}">Board Resolution</a></td>
 
                 </tr>

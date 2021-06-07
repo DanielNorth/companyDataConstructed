@@ -1,10 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+
+<!-- Begin Page Content -->
+<script language="JavaScript">
+function hideA()
+{
+
+    document.getElementById("corporate").style.display="none";
+    document.getElementById("person").style.display="initial";
+
+}
+
+function hideB()
+{
+    document.getElementById("person").style.display="none";
+    document.getElementById("corporate").style.display="initial";
+
+}
+</script>
+
+<input type="radio"  name="aorb" onClick="hideB()" value="corporate">Corporate
+<input type="radio"  name="aorb" onClick="hideA()" value="person">Natural Person
+
+<div id="corporate">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.alreadyADirector) }}
+        {{ wtf.form_field(form.cessationReason) }}
+
+        {{ wtf.form_field(form.corporate) }}
+        {{ wtf.form_field(form.directorNameInChinese) }}
+        {{ wtf.form_field(form.englishName) }}
+
+        <input type="radio" name="reason" value="Director">Director<br>
+        <input type="radio" name="reason" value="AlternateDirector">Alternate Director <input type="text" name="alternateTo" placeholder="Alternate to"/>
+
+        {{ wtf.form_field(form.address1) }}
+        {{ wtf.form_field(form.address2) }}
+        {{ wtf.form_field(form.address3) }}
+
+        {{ wtf.form_field(form.directorEmail) }}
+        {{ wtf.form_field(form.companyNumber) }}
+
+        {{ wtf.form_field(form.alreadyADirectorB) }}
+
+        {{ wtf.form_field(form.submit) }}
+    </form>
+</div>
+
+<div id="person">
+    <form  method="post">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.alreadyADirector) }}
+        {{ wtf.form_field(form.cessationReason) }}
+
+        {{ wtf.form_field(form.naturalPerson) }}
+        {{ wtf.form_field(form.directorNameInChinese) }}
+        {{ wtf.form_field(form.directorSurname) }}
+        {{ wtf.form_field(form.directorOtherName) }}
+
+        <input type="radio" name="reason" value="Director">Director<br>
+        <input type="radio" name="reason" value="AlternateDirector">Alternate Director <input type="text" name="alternateTo" placeholder="Alternate to"/>
+
+        {{ wtf.form_field(form.directorEmail) }}
+        {{ wtf.form_field(form.address1) }}
+        {{ wtf.form_field(form.address2) }}
+        {{ wtf.form_field(form.address3) }}
+
+        {{ wtf.form_field(form.hkidCardNumber) }}
+        {{ wtf.form_field(form.passportIssuingCountry) }}
+        {{ wtf.form_field(form.passportNumber) }}
+
+        {{ wtf.form_field(form.alreadyADirectorB) }}
+
+        {{ wtf.form_field(form.submit) }}
+
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}
