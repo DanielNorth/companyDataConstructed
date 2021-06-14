@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort, request
 from flask_login import login_user, current_user, logout_user, login_required
-from companyFilling.model import Company, Nar1data, Director, TestDB, DirectorChangeResolution
+from companyFilling.model import DirectorResignation, Company, Director, TestDB, DirectorChangeResolution
 from companyFilling import db
 from companyFilling.changeDirector.forms import DirectorInfo, Test
 import os
@@ -27,7 +27,7 @@ def show_director_change_board_res(company_id):
 @allDocuments.route("Board_resolution/director_change/<uuid>")
 def director_change_board_resolution(uuid):
     boardRes = DirectorChangeResolution.query.filter_by(uuid=uuid).first()
-    directors = Director.query.filter_by(company_id=boardRes.company_id, capacity="Director").all()
+    directors = Director.query.filter_by(company_id=boardRes.company_id, capacity="Director", active="active").all()
     return render_template("allDocuments/DirectorChangeBoardRes/changeDirectorRes.html", info=boardRes, directors=directors,
                            uuid=uuid, one=1)
 
@@ -42,16 +42,19 @@ def send_to_directors(company_id, uuid):
              sign the board resolution"""
 
 
-import pdfkit
-from flask import make_response
-
 @allDocuments.route('Board_resolution/director_change_pdf/<uuid>',  methods=['GET'])
+@login_required
 def view_board_resolution(uuid):
-    boardRes = DirectorChangeResolution.query.filter_by(uuid=uuid).first()
-    directors = Director.query.filter_by(company_id=boardRes.company_id, capacity="Director").all()
+    import pdfkit
+    from flask import make_response
 
-    path_wkhtmltopdf = "D:\website_research\wkhtmltopdf\\bin\wkhtmltopdf.exe"
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    boardRes = DirectorChangeResolution.query.filter_by(uuid=uuid).first()
+    directors = Director.query.filter_by(company_id=boardRes.company_id, capacity="Director", active="active").all()
+
+    #path_wkhtmltopdf = "D:\website_research\wkhtmltopdf\\bin\wkhtmltopdf.exe"
+    localpath_wkhtmltopdf = f"companyFilling\static\wkhtmltopdf.exe"
+
+    config = pdfkit.configuration(wkhtmltopdf=localpath_wkhtmltopdf)
     options = {
         "disable-local-file-access": "",
         "enable-local-file-access": None
@@ -84,6 +87,25 @@ def sign_board_resolution(uuid, director_id):
         with open(f"companyFilling/static/img/directorSignature/{filename}.png", 'wb') as f:
             f.write(base64.b64decode(data_uri))
 
-        return redirect(url_for('homePage.homepage'))
+        return redirect(url_for('fillingForm.all_company'))
 
     return render_template('allDocuments/DirectorChangeBoardRes/sign.html', director=director, form=form)
+
+
+@allDocuments.route('director_resignation/<company_id>')
+@login_required
+def list_all_director_resignation(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+    if company.owner_id != current_user.id:
+        abort(403)
+    directors = DirectorResignation.query.filter_by(company_id=company_id).all()
+
+    return render_template('allDocuments/directorResign/show_all_res.html', directors=directors)
+
+
+@allDocuments.route("director_resignation/letter/<uuid>")
+def resignation_letter(uuid):
+    director = DirectorResignation.query.filter_by(uuid=uuid).first()
+    company = Company.query.filter_by(id=director.company_id).first()
+
+    return render_template("allDocuments/directorResign/Directors_Resignation_Letter.html", director=director, company=company)

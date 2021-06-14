@@ -72,9 +72,9 @@ def replace_director(company_id, cessation, appointee, alreadyADirector, cessati
     cessation_date = date.today()
 
     if alreadyADirector == "yes":
-        S2AcessContG = "S2AcessContG1[n]"
+        S2AcessContG = "S2AcessContG1[0]"
     elif alreadyADirector == 'no':
-        S2AcessContG = "S2AcessContG2[n]"
+        S2AcessContG = "S2AcessContG2[0]"
 
     if cessationReason == "Resignation/Others":
         S2AcessReasonG = "S2AcessReasonG1[0]"

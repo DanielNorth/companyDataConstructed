@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--bootstrap 5-->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+		<!--Each resigning director/ Comapny secretary will produce one resignation letter, which is not strictly required, but preferred for doucmentation prupose-->
+		<title>Director's Resignation Letter</title>
+	</head>
+	<body>
+		<div class="container text-center">
+			<br>
+			<!--Please use the company name, place holder here for this h2 tag-->
+			<h2>DIRECTOR'S RESIGNATION LETTER</h2>
+		</div>
+		
+		<div class="container text-left">
+			<p>{{ director.companyName }}
+				{% if company.address1 != '' %}
+					<br>
+					<!--Company Address here, needs to broken into several lines, it is a letter-->
+					{{ company.address1 }}
+					<br>
+				{% endif %}
+
+				{% if company.address2 != '' %}
+					<br>
+					<!--Company Address here, needs to broken into several lines, it is a letter-->
+					{{ company.address2 }}
+					<br>
+				{% endif %}
+
+				{% if company.address3 != '' %}
+					<br>
+					<!--Company Address here, needs to broken into several lines, it is a letter-->
+					{{ company.address3 }}
+					<br>
+				{% endif %}
+				<!--This letter dated the same date as the resolutions-->
+				DATED {{director.date_passed_resolution}}
+			</p>
+		</div>
+		
+		<div class="container">
+			<p>Dear Sirs,</p>
+			<p>	I hereby tender my resignation as a director of {{director.companyName}} (the "<b>Company</b>") with effect from the date of this letter.</p>
+			<p>I confirm that I have no outstanding claims whether for compensation for loss of office or on any other grounds against the Company.</p>
+		</div>
+		
+		<!--Here, we make signatures block for each director. Consider we may replace it with e-signature. Note that the number of signatures block depend on the number of directors-->
+		<div class="container">
+			<br><br>
+			<p>_______________________________________</p>
+			<!--Note: Existing Directors-->
+			<p><b>{{ director.resignDirector }}</b>
+			</p>
+		</div>
+	</div>
+<ul></ul>
+</body>
+</html>

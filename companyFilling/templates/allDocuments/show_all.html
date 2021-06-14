@@ -52,7 +52,7 @@
             data-parent="#abc">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item d-flex" href="{{ url_for('allDocuments.show_director_change_board_res', company_id=company_id) }}">Replace/Remove Director Board Resolution</a>
-                <a class="collapse-item d-flex" href="{{ url_for('changeDirector.add_director', company_id=company_id) }}">Add Director (Natural person)</a>
+                <a class="collapse-item d-flex" href="{{ url_for('allDocuments.list_all_director_resignation', company_id=company_id) }}">Director Resignation Letter</a>
                 <a class="collapse-item d-flex" href="{{ url_for('changeDirector.add_director_corp', company_id=company_id) }}">Add Director (Body Corporate)</a>
                 <a class="collapse-item d-flex" href="#">Edit Director Info</a>
             </div>
@@ -68,7 +68,7 @@
         <div id="companySecretary" class="collapse" aria-labelledby="a"
             data-parent="#abc">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item d-flex" href="{{ url_for('companySecretary.add_secretary', company_id=company_id) }}">Change/Add Company Secretary</a>
+                <a class="collapse-item d-flex" href="{{ url_for('companySecretary.new_secretary', company_id=company_id) }}">Change/Add Company Secretary</a>
                 <a class="collapse-item d-flex" href="">Edit Secretary Info</a>
             </div>
         </div>

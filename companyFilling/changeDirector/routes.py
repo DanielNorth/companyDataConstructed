@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, send_file, Blueprint, abort, request
 from flask_login import login_user, current_user, logout_user, login_required
-from companyFilling.model import Company, Nar1data, Director, TestDB, DirectorChangeResolution, DirectorChange
+from companyFilling.model import Company, DirectorResignation, Director, TestDB, DirectorChangeResolution, DirectorChange
 from companyFilling import db
 from companyFilling.changeDirector.forms import DirectorInfo, Test
 import os
@@ -63,27 +63,16 @@ def add_director_corp(company_id):
     if form.validate_on_submit():
         today = date.today()
         newDirector = Director(company_id=company_id, directorNameInChinese=form.directorNameInChinese.data,
-                               directorOtherName=form.directorOtherName.data, directorEmail=form.directorEmail.data,
+                               directorOtherName=form.englishName.data, directorEmail=form.directorEmail.data,
                                companyOwnerID=current_user.id, companyOrPerson="Corporate", capacity=request.form.get("reason"),
                                alternateTo=request.form.get('alternateTo'), companyNumber=form.companyNumber.data,
                                address1=form.address1.data, address2=form.address2.data,
-                               address3=form.address3.data,dateAdded=today.strftime("%B %d, %Y"),
+                               address3=form.address3.data, dateAdded=today.strftime("%B %d, %Y"),
                                active="active", directorSurname=""
                                )
 
         db.session.add(newDirector)
         db.session.commit()
-
-        from datetime import datetime
-        now = datetime.now()
-        message = f"""Date add: {now.strftime("%d %B, %Y")}
-        Director English Name: {form.directorOtherName.data} 
-        Director Chinese Name: {form.directorNameInChinese.data}
-        Director Email: {form.directorEmail.data}
-        """
-        with open(f"companyFilling/companyDirectorChangeLog/{company_id}.txt", 'a') as file:
-            file.write(message)
-            file.write('\n')
 
         return redirect(url_for('fillingForm.edit_company_info', company_id=company_id))
 
@@ -99,7 +88,6 @@ def remove_director(company_id):
     if current_user.id != director.companyOwnerID:
         abort(403)
 
-    uuidKey = uuid.uuid4()
     return render_template("changeDirector/removeDirector.html", directors=directors, company_id=company_id)
 
 
@@ -114,20 +102,21 @@ def resign(director_id):
 
     from datetime import datetime
     now = datetime.now()
-    message = f"""Date resign: {now.strftime("%d %B, %Y")}
-Director English Name: {director.directorOtherName} {director.directorSurname}
-Director Chinese Name: {director.directorNameInChinese}
-Director Email: {director.directorEmail}
-"""
     director.active = "non-active"
 
     changeInDirector = DirectorChange(company_id=company.id, date=f"{now.strftime('%d %B, %Y')}",
-                                      englishName=f"{director.directorOtherName} {director.directorSurname}",
-                                      chineseName=director.directorNameInChinese,
-                                      email=director.directorEmail, reason="resign")
+                                      resignDirector=f"{director.directorOtherName} {director.directorSurname}",
+                                      reason="resign")
     db.session.add(changeInDirector)
-    db.session.commit()
 
+    from uuid import uuid4
+    uuid_string = str(uuid4())
+    newResignation = DirectorResignation(owner_id=current_user.id, uuid=uuid_string,
+                                         company_id=company.id, companyName=company.companyName,
+                                         resignDirector=f"{director.directorOtherName} {director.directorSurname}",
+                                         date_passed_resolution=f"{now.strftime('%d %B, %Y')}")
+    db.session.add(newResignation)
+    db.session.commit()
 
     xml = ""
     if director.companyOrPerson == "Natural Person" and director.capacity == "Director":
@@ -166,7 +155,7 @@ Director Email: {director.directorEmail}
     <TextField id="S2CapacityGroup1">false</TextField>
     <TextField id="S2CapacityGroup2">false</TextField>
     <TextField id="S2CapacityGroup3">true</TextField>
-    <TextField id="S2alternateTo">{director.alternateTo}</TestField>
+    <TextField id="S2alternateTo">{director.alternateTo}</TextField>
     <TextField id="S2chnName">{director.directorNameInChinese}</TextField>
     <TextField id="S2engSurname">{director.directorSurname}</TextField>
     <TextField id="S2engOthName">{director.directorOtherName}</TextField>
@@ -224,7 +213,7 @@ Director Email: {director.directorEmail}
                 <TextField id="S2CapacityGroup1">false</TextField>
                 <TextField id="S2CapacityGroup2">false</TextField>
                 <TextField id="S2CapacityGroup3">true</TextField>
-                <TextField id="S2alternateTo">{director.alternateTo}<\TextField>
+                <TextField id="S2alternateTo">{director.alternateTo}</TextField>
                 <TextField id="S2chnName"/>
                 <TextField id="S2engSurname"/>
                 <TextField id="S2engOthName"/>
@@ -253,11 +242,6 @@ Director Email: {director.directorEmail}
 
     from companyFilling.changeDirector.utils import send_d4_xml_email
     send_d4_xml_email(company.companyName, f'companyFilling/companyDirectorChangeLog/nd4/Director_{director.directorOtherName}_{director.company_id}_{director.id}.xml')
-
-
-    with open(f"companyFilling/companyDirectorChangeLog/{director.company_id}.txt", 'a') as file:
-        file.write(message)
-        file.write('\n')
 
     oldD = Director.query.filter_by(id=director_id).first()
     oldD.active = "non-active"
@@ -369,3 +353,58 @@ def replace_director(director_id, company_id):
         return redirect(url_for("fillingForm.edit_company_info", company_id=company_id))
 
     return render_template('changeDirector/replaceDirectorForm.html', form=form)
+
+
+@changeDirector.route("director/edit/<company_id>0")
+@login_required
+def list_all_directors(company_id):
+    directors = Director.query.filter_by(company_id=company_id, active="active").all()
+
+    return render_template("changeDirector/listAllDirector.html", directors=directors)
+
+
+@changeDirector.route("director/editInfo/<director_id>0", methods=["POST", 'GET'])
+@login_required
+def edit_director(director_id):
+    director = Director.query.filter_by(id=director_id).first()
+    company_id = director.company_id
+
+    if director.companyOrPerson == "Natural Person":
+        form = DirectorInfo(obj=director)
+
+        if form.validate_on_submit():
+            director.directorNameInChinese = form.directorNameInChinese.data
+            director.directorOtherName = form.directorOtherName.data
+            director.directorSurname=form.directorSurname.data
+            director.directorEmail = form.directorEmail.data
+            director.companyNumber = form.companyNumber.data
+            director.alternateTo = request.form.get('alternateTo')
+            director.address1 = form.address1.data
+            director.address2 = form.address2.data
+            director.address3 = form.address3.data
+            director.hkidCardNumber = form.hkidCardNumber.data
+            director.passportIssuingCountry = form.passportIssuingCountry.data
+            director.passportNumber = form.passportNumber.data
+
+            db.session.commit()
+            return redirect(url_for("fillingForm.edit_company_info", company_id=company_id))
+
+        return render_template("changeDirector/addDirector.html", form=form)
+
+    elif director.companyOrPerson == "Corporate":
+        form = DirectorInfo(obj=director)
+
+        if form.validate_on_submit():
+            director.directorNameInChinese = form.directorNameInChinese.data
+            director.directorOtherName = form.englishName.data
+            director.directorEmail = form.directorEmail.data
+            director.companyNumber=form.companyNumber.data
+            director.alternateTo = request.form.get('alternateTo')
+            director.address1 = form.address1.data
+            director.address2 = form.address2.data
+            director.address3 = form.address3.data
+
+            db.session.commit()
+            return redirect(url_for("fillingForm.edit_company_info", company_id=company_id))
+
+        return render_template("changeDirector/addDirectorCorp.html", form=form)
