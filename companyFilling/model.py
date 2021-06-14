@@ -219,7 +219,7 @@ class DirectorChange(db.Model):
 
     resignDirector = db.Column(db.String(100), nullable=False)
     date = db.Column(db.String(30), nullable=False)
-    replacement = db.Column(db.String(80), nullable=False)
+    replacement = db.Column(db.String(80), nullable=True)
 
     reason = db.Column(db.String(30), nullable=True)
 
@@ -237,3 +237,30 @@ class DirectorChangeResolution(db.Model):
     newDirector = db.Column(db.String(80))
     date_passed_resolution = db.Column(db.String(30))
     companyName = db.Column(db.String(100))
+
+
+class DirectorResignation(db.Model):
+    __tablename__ = "directorresignation"
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer)
+
+    uuid = db.Column(db.String(100), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+    company = db.relationship("Company", backref=db.backref('directorresignation', lazy='dynamic', collection_class=list))
+
+    resignDirector = db.Column(db.String(150))
+    date_passed_resolution = db.Column(db.String(30))
+    companyName = db.Column(db.String(100))
+
+
+class UserMessage(db.Model):
+    __tablename__ = "usermessage"
+    id = db.Column(db.Integer, primary_key=True)
+    read = db.Column(db.Boolean, default=False, nullable=False)
+    owner_id = db.Column(db.Integer)
+
+    company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    company = db.relationship("User", backref=db.backref('usermessage', lazy='dynamic', collection_class=list))
+
+    message = db.Column(db.String(400), nullable=False)
+
