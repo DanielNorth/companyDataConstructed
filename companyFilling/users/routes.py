@@ -18,7 +18,7 @@ def registerUser():
         if (form.email.data == form.confirmedEmail.data) and (form.password.data == form.confirmedPassword.data):
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             newUser = User(username=form.username.data, email=form.email.data,
-                           password=hashed_password)
+                           password=hashed_password, ownedCompany=0)
             db.session.add(newUser)
             db.session.commit()
             return "<h1>New user created</h1>"
@@ -89,6 +89,5 @@ def reset_token(token):
             return redirect(url_for('users.login/'))
 
     return render_template('reset_password.html', title='Reset Password', form=form)
-
 
 
