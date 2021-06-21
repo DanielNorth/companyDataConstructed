@@ -62,3 +62,8 @@ class DirectorInfo(FlaskForm):
                                     choices=["no", 'yes'], validators=[validators.Optional()])
 
     submit = SubmitField("Finish for now", render_kw={"onclick": "return confirm('Are you sure?')"})
+
+
+class SubmitButton(FlaskForm):
+    submit = SubmitField("My information is correct", render_kw={"onclick": "return confirm('Are you sure?')",
+                                                                 "class": "hs-button primary large action-button"})

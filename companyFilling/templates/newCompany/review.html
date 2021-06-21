@@ -21,11 +21,13 @@
 						    	<th>&nbsp;</th>
 						    	<th>Name</th>
 						      <th>Email</th>
-						      <th>Status</th>
-						      <th>&nbsp;</th>
+						      <th>Address</th>
+								<th>Edit</th>
 						    </tr>
 						  </thead>
+
 						  <tbody>
+
                           {% for director in directors %}
 						    <tr class="alert" role="alert">
 						    	<td>
@@ -42,12 +44,8 @@
 						      	</div>
 						      </td>
 						      <td>{{ director.directorEmail }}</td>
-						      <td class="status"><span class="active">Active</span></td>
-						      <td>
-						      	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</button>
-				        	</td>
+						      <td>{{ director.address1 }} {{ director.address2 }} {{ director.address3 }}</td>
+						      <td><a href="{{ url_for('incorporate_new_company.edit_director', director_id=director.id) }}">Edit</a></td>
 						    </tr>
                                 {% endfor %}
 
@@ -76,9 +74,11 @@
 						    <tr>
 						    	<th>&nbsp;</th>
 						    	<th>Name</th>
-						      <th>Email</th>
-						      <th>address</th>
-						      <th>&nbsp;</th>
+						      	<th>Email</th>
+						      	<th>address</th>
+								<th>Shares owned</th>
+								<th>Edit</th>
+						      	<th>&nbsp;</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -93,17 +93,13 @@
 						      <td class="d-flex align-items-center">
 						      	<div class="img" style="background-image: url(images/person_1.jpg);"></div>
 						      	<div class="pl-3 email">
-						      		<span>{{ shareholder.name}}</span>
-						      		<span>Added: 01/03/2020</span>
+						      		<span>{{ shareholder.name }}</span>
 						      	</div>
 						      </td>
 						      <td>{{ shareholder.email}}</td>
 						      <td class="status"><span class="active">{{ shareholder.address}}</span></td>
-						      <td>
-						      	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</button>
-				        	</td>
+						      <td>{{ shareholder.totalShares }}</td>
+								<td><a href="{{ url_for('incorporate_new_company.edit_shareholder', shareHolder_id=shareholder.id, company_id=company_id) }}">Edit</a></td>
 						    </tr>
                           {% endfor %}
 
@@ -114,6 +110,11 @@
 			</div>
 		</div>
 </section>
+
+<form method="post" class="form-signin">
+	<span style="display:inline-block; width: 450px;"></span>
+    <button type=submit class="btn btn-primary btn-user">The above information is correct</button>
+</form>
 
 
 

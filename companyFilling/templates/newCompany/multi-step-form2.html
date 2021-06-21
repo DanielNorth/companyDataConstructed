@@ -522,7 +522,6 @@ display: block;
   <ul id="progressbar">
     <li class="active">Director(s) Information</li>
     <li>Founder(s) Information</li>
-    <li>Share Holder's Information</li>
   </ul>
 
 
@@ -546,31 +545,17 @@ display: block;
 
   <!-- ACQUISITION FIELD SET -->
   <fieldset>
-    <h2 class="fs-title">Share Capital Info</h2>
-
-    <h3 class="fs-subtitle">How have you been doing in acquiring donors?</h3>
-
-
-        <!-- End Calc of Total Number of Donors Fields -->
-    <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
-    <input type="button" data-page="2" name="next" class="next action-button" value="Next" />
-  </fieldset>
-
-
-
-  <!-- Cultivation FIELD SET -->
-  <fieldset>
     <h2 class="fs-title">Share Holder information</h2>
     <h3 class="fs-subtitle">Input all the share holder in your company</h3>
     <span style="display:inline-block; width: 40px;"></span>
 
     <a href="{{ url_for('incorporate_new_company.add_existing_shareholder', company_id=company_id, total_shares=total_shares) }}" target="_blank"><button type="button" class="btn btn-success">   Add a new shareholder</button></a>
 
-        <!-- End Average Gift Size Perchent Change Field -->
-    <input type="button" data-page="3" name="previous" class="previous action-button" value="Previous" />
+        <!-- End Calc of Total Number of Donors Fields -->
+     <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
     <input id="submit" class="hs-button primary large action-button next" type="submit" value="Review Information" >
-
   </fieldset>
+
 </form>
 
 

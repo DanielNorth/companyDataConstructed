@@ -6,7 +6,7 @@ from companyFilling.changeDirector.forms import Test
 import os
 import uuid
 from datetime import date
-from .forms import CompanyInfo
+from .forms import CompanyInfo, SubmitButton
 
 incorporate_new_company = Blueprint('incorporate_new_company', __name__)
 
@@ -149,9 +149,91 @@ def add_existing_shareholder(company_id, total_shares):
 @incorporate_new_company.route("review/<company_id>", methods=["POST", "GET"])
 @login_required
 def review(company_id):
+    #form = SubmitButton()
     company = Company.query.filter_by(id=company_id).first()
     shareHolders = ShareHolderStake.query.filter_by(company_id=company_id).all()
     directors = Director.query.filter_by(company_id=company_id).all()
 
+    if request.method == "POST":
+        return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=OfficialRickAstleyOfficialRickAstleyOfficialArtistChannel")
+
+
     return render_template('newCompany/review.html', company=company, share_holders=shareHolders,
-                           directors=directors)
+                           directors=directors, company_id=company_id)
+
+
+@incorporate_new_company.route("edit/<shareHolder_id>/<company_id>", methods=["POST", "GET"])
+@login_required
+def edit_shareholder(shareHolder_id, company_id):
+    try:
+        share_clas = ShareHolderStake.query.filter_by(company_id=company_id).all()
+        share_classes = []
+        for i in share_clas:
+            if i.shareClass not in share_classes:
+                share_classes.append(i.shareClass)
+    except:
+        share_classes = []
+    shareHolderInfo = ShareHolderStake.query.filter_by(id=shareHolder_id).first()
+
+    from companyFilling.shareHolder.forms import ShareInfo
+    form = ShareInfo(obj=shareHolderInfo)
+
+    if form.validate_on_submit():
+        obj = ShareHolderStake.query.filter_by(id=shareHolder_id).first()
+        obj.name = form.name.data
+        obj.address = form.address.data
+        obj.shareClass = form.shareClass.data
+        obj.totalShares = form.totalShares.data
+        db.session.commit()
+        return redirect(url_for("incorporate_new_company.review", company_id=company_id))
+
+    return render_template("shareHolder/editShareHolder.html", id=shareHolder_id, form=form, share_classes=share_classes)
+
+
+@incorporate_new_company.route("director/editInfo/<director_id>0", methods=["POST", 'GET'])
+@login_required
+def edit_director(director_id):
+    from companyFilling.changeDirector.forms import DirectorInfo
+
+    director = Director.query.filter_by(id=director_id).first()
+    company_id = director.company_id
+
+    if director.companyOrPerson == "Natural Person":
+        form = DirectorInfo(obj=director)
+
+        if form.validate_on_submit():
+            director.directorNameInChinese = form.directorNameInChinese.data
+            director.directorOtherName = form.directorOtherName.data
+            director.directorSurname=form.directorSurname.data
+            director.directorEmail = form.directorEmail.data
+            director.companyNumber = form.companyNumber.data
+            director.alternateTo = request.form.get('alternateTo')
+            director.address1 = form.address1.data
+            director.address2 = form.address2.data
+            director.address3 = form.address3.data
+            director.hkidCardNumber = form.hkidCardNumber.data
+            director.passportIssuingCountry = form.passportIssuingCountry.data
+            director.passportNumber = form.passportNumber.data
+
+            db.session.commit()
+            return redirect(url_for("fillingForm.edit_company_info", company_id=company_id))
+
+        return render_template("changeDirector/addDirector.html", form=form)
+
+    elif director.companyOrPerson == "Corporate":
+        form = DirectorInfo(obj=director)
+
+        if form.validate_on_submit():
+            director.directorNameInChinese = form.directorNameInChinese.data
+            director.directorOtherName = form.englishName.data
+            director.directorEmail = form.directorEmail.data
+            director.companyNumber=form.companyNumber.data
+            director.alternateTo = request.form.get('alternateTo')
+            director.address1 = form.address1.data
+            director.address2 = form.address2.data
+            director.address3 = form.address3.data
+
+            db.session.commit()
+            return redirect(url_for("fillingForm.edit_company_info", company_id=company_id))
+
+        return render_template("changeDirector/addDirectorCorp.html", form=form)
