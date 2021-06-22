@@ -36,3 +36,12 @@ class ResetPasswordForm(FlaskForm):
 class NewPassword(FlaskForm):
     newPassword = PasswordField('New password: ', validators=[InputRequired(), Length(min=6, max=80)])
     confirmedNewPassword = PasswordField('Confirmed password: ', validators=[InputRequired(), Length(min=6, max=80)])
+
+
+class PasswordChange(FlaskForm):
+    oldPassword = PasswordField("Old password: ", validators=[InputRequired(), Length(min=6, max=80)])
+    newPassword = PasswordField("New password: ", validators=[InputRequired(), Length(min=6, max=80)])
+    confirmedNewPassword = PasswordField("Confirmed New password", validators=[InputRequired(), Length(min=6, max=80)])
+
+    submit = SubmitField("Confirm", render_kw={"class": "btn btn-primary",
+                                               "color": "red"})

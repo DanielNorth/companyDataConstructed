@@ -25,7 +25,7 @@ def registerUser():
         else:
             flash('seems like the confirmed email or password doesn\'s match')
 
-    return render_template('register.html', form=form)
+    return render_template('users/register.html', form=form)
 
 
 @users.route('login/', methods=['GET', "POST"], endpoint='login/')
@@ -43,7 +43,7 @@ def login():
         else:
             flash('Incorrect email or password', 'warning')
 
-    return render_template('login.html', form=form)
+    return render_template('users/login.html', form=form)
 
 
 @users.route('logout/')
@@ -68,7 +68,7 @@ def reset_request():
         # else:
         #     flash("Email doesn't exist")
 
-    return render_template('forgot-password.html', title='Reset Password', form=form)
+    return render_template('users/forgot-password.html', title='Reset Password', form=form)
 
 
 @users.route('/reset_password/<token>', methods=["GET", "POST"])
@@ -88,6 +88,31 @@ def reset_token(token):
             flash("your password is reset, you are now able to log in")
             return redirect(url_for('users.login/'))
 
-    return render_template('reset_password.html', title='Reset Password', form=form)
+    return render_template('users/reset_password.html', title='Reset Password', form=form)
+
+
+@users.route("profile/password_change", methods=['POST', "GET"])
+@login_required
+def password_change():
+    from .forms import PasswordChange
+    form = PasswordChange()
+
+    if form.validate_on_submit():
+        oldPassword = User.query.filter_by(id=current_user.id).first()
+        if (form.newPassword.data == form.confirmedNewPassword.data) and check_password_hash(oldPassword.password, form.oldPassword.data):
+            oldPassword.password = generate_password_hash(form.confirmedNewPassword.data, method='sha256')
+            db.session.commit()
+
+            return redirect("https://www.youtube.com/watch?v=a_XgQhMPeEQ&ab_channel=FleetwoodMacFleetwoodMacOfficialArtistChannel")
+
+    return render_template("users/password_change.html", form=form)
+
+
+@users.route('profile1')
+@login_required
+def profile():
+    user = User.query.filter_by(id=current_user.id).first()
+
+    return render_template('users/profile.html', user=user)
 
 
