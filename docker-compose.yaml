@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  my_app:
+    build:
+      context: ./
+      args:
+        SECRET_KEY: "WvGFY145LzM2lu7dP70Xb15kdh8I68lL"
+        MAIL_USERNAME: 'danielsplash10'
+        MAIL_PASSWORD: 'Daniel02raptors'
+    ports:
+      - 5000:5000
+
+
