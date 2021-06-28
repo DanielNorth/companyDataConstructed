@@ -4,10 +4,15 @@ services:
   my_app:
     build:
       context: ./
-      args:
+      ENV:
         SECRET_KEY: "WvGFY145LzM2lu7dP70Xb15kdh8I68lL"
         MAIL_USERNAME: 'danielsplash10'
         MAIL_PASSWORD: 'Daniel02raptors'
+        servername: "hspector"
+        database: "HSpector"
+        username: "hspector"
+        password: "Daniel02raptors"
+
     ports:
       - 5000:5000
 
