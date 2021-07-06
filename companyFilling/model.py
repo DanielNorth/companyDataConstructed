@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
     ownedCompany = db.Column(db.Integer)
+    emailConfirmed = db.Column(db.Boolean, default=False)
 
     companies = db.relationship('Company', backref='owner', lazy=True)
 
@@ -33,17 +34,21 @@ class User(db.Model, UserMixin):
             return None
         return User.query.get(user_id)
 
-    def __repr__(self):
-        return self.username, self.email
+    # def __repr__(self):
+    #     return self.username, self.email
+
+    def __str__(self):
+        return str(self.id)#, self.email, self.ownedCompany
 
 
 class Company(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+
     companyName = db.Column(db.String(200), nullable=False)
     companyChineseName = db.Column(db.String(100), nullable=True)
     businessName = db.Column(db.String(200), nullable=True)
     companyNumber = db.Column(db.String(20), nullable=True)
-    typeOfCompany = db.Column(db.String(100))
+    typeOfCompany = db.Column(db.String(100), nullable=True)
     addressOfRegisteredOffice1 = db.Column(db.String(100), nullable=True)
     addressOfRegisteredOffice2 = db.Column(db.String(100), nullable=True)
     addressOfRegisteredOffice3 = db.Column(db.String(100), nullable=True)
@@ -56,14 +61,10 @@ class Company(db.Model, UserMixin):
     # this is a many in the table
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    # this is a one in the table
-    # one company can have many form
-    nar1form = db.relationship('Nar1data', backref='company_file', lazy=True)
-
     # one to one to the director model
 
     def __str__(self):
-        return self.companyName, self.owner_id
+        return str(self.companyName)
 
 
 class Director(db.Model):
@@ -130,29 +131,6 @@ class Secretary(db.Model):
     company = db.relationship("Company", backref=db.backref('secretaries', lazy='dynamic', collection_class=list))
 
 
-class Nar1data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
-    # the company that owns the form
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
-
-    companyName = db.Column(db.String(200))
-    S2compName = db.Column(db.String(200))
-    typeOfCompany = db.Column(db.String(200))
-
-    date1 = db.Column(db.DateTime)
-    financialStatementStartDate = db.Column(db.DateTime)
-    financialStatementEndDate = db.Column(db.DateTime)
-
-    registeredOfficeAddress = db.Column(db.Text())
-    emailAddress = db.Column(db.String(200))
-    mortgagesCharges = db.Column(db.Text())
-    q9 = db.Column(db.String(100))
-
-    def __repr__(self):
-        return self.companyName, self.typeOfCompany
-
-
 class TestDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     otherCompany = db.Column(db.String(300))
@@ -167,7 +145,7 @@ class ShareHolderStake(db.Model):
     email = db.Column(db.String(150), nullable=True)
 
     # holding shares in which company
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'))
     company = db.relationship("Company", backref=db.backref('shareholder', lazy='dynamic', collection_class=list))
 
     shareClass = db.Column(db.String(50), nullable=True)
@@ -251,16 +229,16 @@ class DirectorResignation(db.Model):
     resignDirector = db.Column(db.String(150))
     date_passed_resolution = db.Column(db.String(30))
     companyName = db.Column(db.String(100))
+    director_id = db.Column(db.Integer)
 
 
 class UserMessage(db.Model):
     __tablename__ = "usermessage"
     id = db.Column(db.Integer, primary_key=True)
     read = db.Column(db.Boolean, default=False, nullable=False)
-    owner_id = db.Column(db.Integer)
 
-    company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    company = db.relationship("User", backref=db.backref('usermessage', lazy='dynamic', collection_class=list))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship("User", backref=db.backref('usermessage', lazy='dynamic', collection_class=list))
 
     message = db.Column(db.String(400), nullable=False)
 
