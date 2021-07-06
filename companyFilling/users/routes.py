@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from companyFilling.users.forms import RegisterForm, LoginForm, ResetPasswordForm, NewPassword
 from companyFilling.model import User
 from companyFilling import db, mail
-from companyFilling.users.utils import send_reset_email
+from companyFilling.users.utils import send_reset_email, send_confirmation_mail
 from flask_mail import Message
 
 users = Blueprint('users', __name__)
@@ -21,9 +21,10 @@ def registerUser():
                            password=hashed_password, ownedCompany=0)
             db.session.add(newUser)
             db.session.commit()
+            send_confirmation_mail(newUser)
             return "<h1>New user created</h1>"
         else:
-            flash('seems like the confirmed email or password doesn\'s match')
+            flash('seems like the confirmed email or password doesn\'t match')
 
     return render_template('users/register.html', form=form)
 
@@ -91,6 +92,17 @@ def reset_token(token):
     return render_template('users/reset_password.html', title='Reset Password', form=form)
 
 
+@users.route("confirm_email/<token>")
+def confirm_email(token):
+    user = User.verify_reset_token(token=token)
+    if user is None:
+        return "<h1>Sorry, there is an error and we can not confirm the email for now. Please try later</h1>"
+    else:
+        user.emailConfirmed = True
+        db.session.commit()
+        return render_template('users/emailConfirmed.html')
+
+
 @users.route("profile/password_change", methods=['POST', "GET"])
 @login_required
 def password_change():
@@ -114,5 +126,11 @@ def profile():
     user = User.query.filter_by(id=current_user.id).first()
 
     return render_template('users/profile.html', user=user)
+
+
+@users.route("message")
+@login_required
+def message():
+    pass
 
 
