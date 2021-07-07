@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<h2>Message Centre</h2>
+
+{% for message in messages %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card mb-4 py-3 border-left-primary">
+            {{ message.timeCreated }}
+            <div class="card-body">{{ message.message }}</div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+{% endblock %}

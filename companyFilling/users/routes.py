@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from companyFilling.users.forms import RegisterForm, LoginForm, ResetPasswordForm, NewPassword
-from companyFilling.model import User
+from companyFilling.model import User, UserMessage
 from companyFilling import db, mail
 from companyFilling.users.utils import send_reset_email, send_confirmation_mail
 from flask_mail import Message
@@ -128,9 +128,22 @@ def profile():
     return render_template('users/profile.html', user=user)
 
 
-@users.route("message")
+@users.route("message_centre")
 @login_required
-def message():
-    pass
+def message_centre():
+    messages = UserMessage.query.filter_by(user_id=current_user.id).order_by(UserMessage.id.desc()).all()
+
+    return render_template('users/messageCentre.html', messages=messages)
+
+
+@users.route("message/<message_id>")
+@login_required
+def message_detail(message_id):
+    message = UserMessage.query.filter_by(id=message_id).first()
+    if not message.read:
+        message.read = True
+        db.session.commit()
+
+    return render_template('users/messageDetail.html', message=message)
 
 

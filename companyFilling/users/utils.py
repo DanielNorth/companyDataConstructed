@@ -34,3 +34,25 @@ def send_email_to_myself(subject, message_body):
                   recipients=['danielsplash10@gmail.com'])
     msg.body = message_body
     mail.send(msg)
+
+
+def four_messages():
+    from companyFilling.model import UserMessage
+    from flask_login import current_user
+    try:
+        messages = UserMessage.query.filter_by(user_id=current_user.id).order_by(UserMessage.id.desc()).limit(4).all()
+        return messages
+
+    except:
+        return None
+
+
+def unread_messages_count():
+    from companyFilling.model import UserMessage
+    from flask_login import current_user
+    try:
+        messages = UserMessage.query.filter_by(user_id=current_user.id, read=False).count()
+        return messages
+
+    except:
+        return 0
