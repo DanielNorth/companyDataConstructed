@@ -3,7 +3,7 @@ from flask import current_app
 from flask_login import UserMixin
 from companyFilling import db, login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-import uuid
+import datetime
 
 
 @login_manager.user_loader
@@ -241,4 +241,5 @@ class UserMessage(db.Model):
     user = db.relationship("User", backref=db.backref('usermessage', lazy='dynamic', collection_class=list))
 
     message = db.Column(db.String(400), nullable=False)
+    timeCreated = db.Column(db.String(200), default=(datetime.datetime.now()+datetime.timedelta(hours=12)).strftime("%m/%d/%Y, %H:%M"))
 
