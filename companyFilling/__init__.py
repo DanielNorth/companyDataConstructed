@@ -15,6 +15,8 @@ migrate = Migrate()
 
 
 def create_app():
+    import sqlalchemy as sa
+
     app = Flask(__name__)
     app.config.from_object(Config)
 
@@ -26,7 +28,7 @@ def create_app():
     mail.init_app(app)
     migrate.init_app(app=app, db=db)
 
-    from companyFilling.model import User, Company, ShareHolderStake, ShareCapital, Director
+    from companyFilling.model import User, Company, ShareHolderStake, ShareCapital, Director, UserMessage
     with app.app_context():
        db.create_all()
 
@@ -59,16 +61,17 @@ def create_app():
     app.register_blueprint(incorporate_new_company, url_prefix="/incorporate_new_company")
 
     from flask_login import current_user
-
     from flask_admin.contrib.sqla import ModelView
+
+
     class CompanyModelView(ModelView):
         can_delete = True  # disable model deletion
         page_size = 50  # the number of entries to display on the list view
 
         def is_accessible(self):
-            return int(current_user.id) == 3
+            return int(current_user.id) == 1 or int(current_user.id) == 2
 
-        
+
     login_manager.login_view = 'admin.login'
     #from flask_admin.contrib.sqla import ModelView
     from flask_admin import Admin
@@ -81,8 +84,22 @@ def create_app():
     admins.add_view(CompanyModelView(ShareHolderStake, db.session))
     admins.add_view(CompanyModelView(ShareCapital, db.session))
     admins.add_view(CompanyModelView(Director, db.session))
+    admins.add_view(CompanyModelView(UserMessage, db.session))
 
     # from companyFilling.admin import admin
     # app.register_blueprint(admin, url_prefix='/admin')
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        from flask import render_template
+        return render_template('404.html'), 404
+
+
+    @app.context_processor
+    def all_messages():
+        from companyFilling.users.utils import unread_messages_count, four_messages
+        a = unread_messages_count()
+        return {"unread_messages_count": unread_messages_count(),
+                "global_messages": four_messages()}
 
     return app
