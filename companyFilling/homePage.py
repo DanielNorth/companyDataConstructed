@@ -23,13 +23,6 @@ def homepage():
     return render_template('landingPage/betterHomePage.html', form=form)
 
 
-@homePage.route("contact/<name>")
-def contact_us(name):
-    form = ContactUs()
-
-    return render_template("landingPage/contact_us", form=form)
-
-
 class ContactUs(FlaskForm):
     name = StringField("", render_kw={"placeholder": "Name"})
     email = EmailField("", render_kw={"placeholder": "Email"})
