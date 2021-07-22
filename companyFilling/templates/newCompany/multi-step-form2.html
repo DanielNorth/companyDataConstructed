@@ -549,6 +549,34 @@ display: block;
 
       <input type="button" data-page="1" name="next" class="next action-button" value="Next" />
 
+      <div class="table-responsive">
+                <table class="table table-bordered" id="directorTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for director in directors %}
+
+                    <tr>
+                        <td>{{ director.directorOtherName}} {{ director.directorSurname }}</td>
+                        <td>{{ director.directorEmail }}</td>
+                        <td>{{ director.address1 }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+
+    </div>
+
   </fieldset>
 
 
@@ -565,7 +593,6 @@ display: block;
         <!-- End Calc of Total Number of Donors Fields -->
      <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
     <input id="submit" class="hs-button primary large action-button next" type="submit" value="Review Information" >
-
 
 
 
@@ -592,10 +619,10 @@ display: block;
 
                     </tbody>
                 </table>
-            
 
 
-</div>
+
+    </div>
                 <!-- /.container-fluid -->
 
 </div>
@@ -682,11 +709,11 @@ display: block;
      $('#insert').val("Inserting");
     },
     success:function(data){
-      alert("This share holder has been submitted")
+      alert("This share holder has been submitted");
       if (data=='success')  {
       $("#add_data_Modal .close").click()
 
-       //window.location.href = "/incorporate_new_company/directors_founders/" + company_id + "/" + total_shares;
+
      }
     }
    });
