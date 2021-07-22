@@ -258,112 +258,112 @@ display: block;
 
 /* my modal */
 
-.modal p{
-  font-size: 15px;
-  font-weight: 100;
-  font-family: sans-serif;
-  color: #3C3B3B;
-  line-height: 21px;
-}
+<!--.modal p{-->
+<!--  font-size: 15px;-->
+<!--  font-weight: 100;-->
+<!--  font-family: sans-serif;-->
+<!--  color: #3C3B3B;-->
+<!--  line-height: 21px;-->
+<!--}-->
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  max-width: 630px;
-  min-width: 320px;
-  height: auto;
-  z-index: 2000;
-  visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.modal.modal-show {
-  visibility: visible;
-}
-.lt-ie9 .modal {
-  top: 0;
-  margin-left: -315px;
-}
+<!--.modal {-->
+<!--  position: fixed;-->
+<!--  top: 50%;-->
+<!--  left: 50%;-->
+<!--  width: 50%;-->
+<!--  max-width: 630px;-->
+<!--  min-width: 320px;-->
+<!--  height: auto;-->
+<!--  z-index: 2000;-->
+<!--  visibility: hidden;-->
+<!--  -moz-backface-visibility: hidden;-->
+<!--  -webkit-backface-visibility: hidden;-->
+<!--  backface-visibility: hidden;-->
+<!--  -moz-transform: translate(-50%, -50%);-->
+<!--  -ms-transform: translate(-50%, -50%);-->
+<!--  -webkit-transform: translate(-50%, -50%);-->
+<!--  transform: translate(-50%, -50%);-->
+<!--}-->
+<!--.modal.modal-show {-->
+<!--  visibility: visible;-->
+<!--}-->
+<!--.lt-ie9 .modal {-->
+<!--  top: 0;-->
+<!--  margin-left: -315px;-->
+<!--}-->
 
-.modal-content {
-  background: #ffffff;
-  position: relative;
-  margin: 0 auto;
-  padding: 40px;
-  border-radius: 3px;
-}
+<!--.modal-content {-->
+<!--  background: #ffffff;-->
+<!--  position: relative;-->
+<!--  margin: 0 auto;-->
+<!--  padding: 40px;-->
+<!--  border-radius: 3px;-->
+<!--}-->
 
-.modal-overlay {
-  background: #000000;
-  position: fixed;
-  visibility: hidden;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  -moz-transition-property: visibility, opacity;
-  -o-transition-property: visibility, opacity;
-  -webkit-transition-property: visibility, opacity;
-  transition-property: visibility, opacity;
-  -moz-transition-delay: 0.5s, 0.1s;
-  -o-transition-delay: 0.5s, 0.1s;
-  -webkit-transition-delay: 0.5s, 0.1s;
-  transition-delay: 0.5s, 0.1s;
-  -moz-transition-duration: 0, 0.5s;
-  -o-transition-duration: 0, 0.5s;
-  -webkit-transition-duration: 0, 0.5s;
-  transition-duration: 0, 0.5s;
-}
-.modal-show .modal-overlay {
-  visibility: visible;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-  opacity: 0.6;
-  -moz-transition: opacity 0.5s;
-  -o-transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
-}
+<!--.modal-overlay {-->
+<!--  background: #000000;-->
+<!--  position: fixed;-->
+<!--  visibility: hidden;-->
+<!--  top: 0;-->
+<!--  left: 0;-->
+<!--  width: 100%;-->
+<!--  height: 100%;-->
+<!--  z-index: 1000;-->
+<!--  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);-->
+<!--  opacity: 0;-->
+<!--  -moz-transition-property: visibility, opacity;-->
+<!--  -o-transition-property: visibility, opacity;-->
+<!--  -webkit-transition-property: visibility, opacity;-->
+<!--  transition-property: visibility, opacity;-->
+<!--  -moz-transition-delay: 0.5s, 0.1s;-->
+<!--  -o-transition-delay: 0.5s, 0.1s;-->
+<!--  -webkit-transition-delay: 0.5s, 0.1s;-->
+<!--  transition-delay: 0.5s, 0.1s;-->
+<!--  -moz-transition-duration: 0, 0.5s;-->
+<!--  -o-transition-duration: 0, 0.5s;-->
+<!--  -webkit-transition-duration: 0, 0.5s;-->
+<!--  transition-duration: 0, 0.5s;-->
+<!--}-->
+<!--.modal-show .modal-overlay {-->
+<!--  visibility: visible;-->
+<!--  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);-->
+<!--  opacity: 0.6;-->
+<!--  -moz-transition: opacity 0.5s;-->
+<!--  -o-transition: opacity 0.5s;-->
+<!--  -webkit-transition: opacity 0.5s;-->
+<!--  transition: opacity 0.5s;-->
+<!--}-->
 
-/*slide*/
-.modal[data-modal-effect|=slide] .modal-content {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  -moz-transition: all 0.5s 0;
-  -o-transition: all 0.5s 0;
-  -webkit-transition: all 0.5s 0;
-  transition: all 0.5s 0;
-}
-.modal[data-modal-effect|=slide].modal-show .modal-content {
-  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-  opacity: 1;
-  -moz-transition: all 0.5s 0.1s;
-  -o-transition: all 0.5s 0.1s;
-  -webkit-transition: all 0.5s;
-  -webkit-transition-delay: 0.1s;
-  transition: all 0.5s 0.1s;
-}
-.modal[data-modal-effect=slide-top] .modal-content {
-  -moz-transform: translateY(-300%);
-  -ms-transform: translateY(-300%);
-  -webkit-transform: translateY(-300%);
-  transform: translateY(-300%);
-}
-.modal[data-modal-effect=slide-top].modal-show .modal-content {
-  -moz-transform: translateY(0);
-  -ms-transform: translateY(0);
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-}
+<!--/*slide*/-->
+<!--.modal[data-modal-effect|=slide] .modal-content {-->
+<!--  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);-->
+<!--  opacity: 0;-->
+<!--  -moz-transition: all 0.5s 0;-->
+<!--  -o-transition: all 0.5s 0;-->
+<!--  -webkit-transition: all 0.5s 0;-->
+<!--  transition: all 0.5s 0;-->
+<!--}-->
+<!--.modal[data-modal-effect|=slide].modal-show .modal-content {-->
+<!--  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);-->
+<!--  opacity: 1;-->
+<!--  -moz-transition: all 0.5s 0.1s;-->
+<!--  -o-transition: all 0.5s 0.1s;-->
+<!--  -webkit-transition: all 0.5s;-->
+<!--  -webkit-transition-delay: 0.1s;-->
+<!--  transition: all 0.5s 0.1s;-->
+<!--}-->
+<!--.modal[data-modal-effect=slide-top] .modal-content {-->
+<!--  -moz-transform: translateY(-300%);-->
+<!--  -ms-transform: translateY(-300%);-->
+<!--  -webkit-transform: translateY(-300%);-->
+<!--  transform: translateY(-300%);-->
+<!--}-->
+<!--.modal[data-modal-effect=slide-top].modal-show .modal-content {-->
+<!--  -moz-transform: translateY(0);-->
+<!--  -ms-transform: translateY(0);-->
+<!--  -webkit-transform: translateY(0);-->
+<!--  transform: translateY(0);-->
+<!--}-->
 
 
 /* RESPONSIVE */
@@ -503,20 +503,30 @@ display: block;
   display: inline-block;
   font-size: 16px;
 }
+
+
+
+.modal-open{overflow:hidden}.modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0}.modal.fade .modal-dialog{-webkit-transition:-webkit-transform .3s ease-out;-o-transition:-o-transform .3s ease-out;transition:transform .3s ease-out;-webkit-transform:translate(0,-25%);-ms-transform:translate(0,-25%);-o-transform:translate(0,-25%);transform:translate(0,-25%)}.modal.in .modal-dialog{-webkit-transform:translate(0,0);-ms-transform:translate(0,0);-o-transform:translate(0,0);transform:translate(0,0)}.modal-open .modal{overflow-x:hidden;overflow-y:auto}.modal-dialog{position:relative;width:auto;margin:10px}.modal-content{position:relative;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #999;border:1px solid rgba(0,0,0,.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);box-shadow:0 3px 9px rgba(0,0,0,.5)}.modal-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;background-color:#000}.modal-backdrop.fade{filter:alpha(opacity=0);opacity:0}.modal-backdrop.in{filter:alpha(opacity=50);opacity:.5}.modal-header{padding:15px;border-bottom:1px solid #e5e5e5}.modal-header .close{margin-top:-2px}.modal-title{margin:0;line-height:1.42857143}.modal-body{position:relative;padding:15px}.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}.modal-footer .btn+.btn{margin-bottom:0;margin-left:5px}.modal-footer .btn-group .btn+.btn{margin-left:-1px}.modal-footer .btn-block+.btn-block{margin-left:0}.modal-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}@media (min-width:768px){.modal-dialog{width:600px;margin:30px auto}.modal-content{-webkit-box-shadow:0 5px 15px rgba(0,0,0,.5);box-shadow:0 5px 15px rgba(0,0,0,.5)}.modal-sm{width:300px}}@media (min-width:992px){.modal-lg{width:900px}}.tooltip{position:absolute;z-index:1070;display:block;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:12px;font-style:normal;font-weight:400;line-height:1.42857143;text-align:left;text-align:start;text-decoration:none;text-shadow:none;text-transform:none;letter-spacing:normal;word-break:normal;word-spacing:normal;word-wrap:normal;white-space:normal;filter:alpha(opacity=0);opacity:0;line-break:auto}
+
 </style>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
 <!-- Modal -info -->
-<div class="container">
-<div id="modal-3" class="modal" data-modal-effect="slide-top">
-  <div class="modal-content">
-    <h2 class="fs-title">Score Index</h2>
-    <h3 class="fs-subtitle">Getting the most out of your data</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis consectetur ligula. Morbi dapibus tellus a ipsum sollicitudin aliquet. Phasellus id est lacus. Pellentesque a elementum velit, a tempor nulla. Mauris mauris lectus, tincidunt et purus rhoncus, eleifend convallis turpis. Nunc ullamcorper bibendum diam, vitae tempus dolor hendrerit iaculis. Phasellus tellus elit, feugiat vel mi et, euismod varius augue. Nulla a porttitor sapien. Donec vestibulum ac nisl sed bibendum. Praesent neque ipsum, commodo eget venenatis vel, tempus sit amet ante. Curabitur vel odio eget urna dapibus imperdiet sit amet eget felis. Vestibulum eros velit, posuere a metus eget, aliquam euismod purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-    <input type="button" name="next" class="next action-button modal-close" value="Got it!">
-  </div>
-</div>
-</div>
+<!--<div class="container">-->
+<!--<div id="modal-3" class="modal" data-modal-effect="slide-top">-->
+<!--  <div class="modal-content">-->
+<!--    <h2 class="fs-title">Score Index</h2>-->
+<!--    <h3 class="fs-subtitle">Getting the most out of your data</h3>-->
+<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis consectetur ligula. Morbi dapibus tellus a ipsum sollicitudin aliquet. Phasellus id est lacus. Pellentesque a elementum velit, a tempor nulla. Mauris mauris lectus, tincidunt et purus rhoncus, eleifend convallis turpis. Nunc ullamcorper bibendum diam, vitae tempus dolor hendrerit iaculis. Phasellus tellus elit, feugiat vel mi et, euismod varius augue. Nulla a porttitor sapien. Donec vestibulum ac nisl sed bibendum. Praesent neque ipsum, commodo eget venenatis vel, tempus sit amet ante. Curabitur vel odio eget urna dapibus imperdiet sit amet eget felis. Vestibulum eros velit, posuere a metus eget, aliquam euismod purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>-->
+<!--    <input type="button" name="next" class="next action-button modal-close" value="Got it!">-->
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
 
 <form method="POST" class="steps" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="">
   <ul id="progressbar">
@@ -547,16 +557,92 @@ display: block;
   <fieldset>
     <h2 class="fs-title">Share Holder information</h2>
     <h3 class="fs-subtitle">Input all the share holder in your company</h3>
+      <h3 class="fs-subtitle">You have a total of {{ total_shares }} shares</h3>
     <span style="display:inline-block; width: 40px;"></span>
 
-    <a href="{{ url_for('incorporate_new_company.add_existing_shareholder', company_id=company_id, total_shares=total_shares) }}"><button type="button" class="btn btn-success">   Add a new shareholder</button></a>
+    <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add new shareholder cunt</button>
 
         <!-- End Calc of Total Number of Donors Fields -->
      <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
     <input id="submit" class="hs-button primary large action-button next" type="submit" value="Review Information" >
+
+
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Total Shares</th>
+                        <th>Address</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for shareHolder in share_holders %}
+
+                    <tr>
+                        <td>{{ shareHolder.name}}</td>
+                        <td>{{ shareHolder.totalShares }}</td>
+                        <td>{{ shareHolder.address }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            
+
+
+</div>
+                <!-- /.container-fluid -->
+
+</div>
+
+
+
+
+
   </fieldset>
 
 </form>
+
+
+
+<div id="add_data_Modal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Add your shareholder</h4>
+   </div>
+   <div class="modal-body">
+    <form method="POST" id="insert_form">
+
+
+        <label>Enter shareholder name</label>
+         <input type="text" name="name" id="name" class="form-control" />
+         <br />
+         <label>Enter shareholder Address</label>
+         <textarea name="address" id="address" class="form-control"></textarea>
+         <br />
+         <label>Enter shareholder email</label>
+         <input name="email" id="email" class="form-control"/>
+         <br />
+        <label>Enter shareholder total shares</label>
+         <input name="totalShares" id="totalShares" class="form-control"/>
+
+         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+
+    </form>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
 
 
 {% endblock %}
@@ -564,8 +650,50 @@ display: block;
 
 {% block newScript %}
 
-    <script language="JavaScript">
-        $(document).ready(function() {
+<script type="text/javascript">
+    var company_id = '{{ company_id }}'
+    var total_shares = '{{ total_shares }}'
+
+  $(document).ready(function() {
+
+  $('#insert_form').on("submit", function(event){
+  event.preventDefault();
+  if($('#name').val() == "")
+  {
+   alert("Name is required");
+  }
+  else if($('#address').val() == '')
+  {
+   alert("Address is required");
+  }
+  else if($('#email').val() == '')
+  {
+   alert("Designation is required");
+  }
+
+  else
+  {
+   $.ajax({
+    url:"/incorporate_new_company/new_shareHolder/" + company_id,
+    method:"POST",
+    data:$('#insert_form').serialize(),
+
+    beforeSend:function(){
+     $('#insert').val("Inserting");
+    },
+    success:function(data){
+      alert("This share holder has been submitted")
+      if (data=='success')  {
+      $("#add_data_Modal .close").click()
+
+       //window.location.href = "/incorporate_new_company/directors_founders/" + company_id + "/" + total_shares;
+     }
+    }
+   });
+  }
+ });
+
+
     var current_fs, next_fs, previous_fs;
     var left, opacity, scale;
     var animating;
@@ -582,6 +710,10 @@ display: block;
             $(element).next('span').hide();
         }
     });
+
+
+
+
     $(".next").click(function() {
         $(".steps").validate({
             errorClass: 'invalid',
@@ -969,8 +1101,15 @@ var modules = {
         }
     }
 }
+
 modules.init();
-    </script>
+
+
+
+
+
+
+</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
