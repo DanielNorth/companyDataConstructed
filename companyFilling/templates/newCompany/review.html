@@ -111,11 +111,43 @@
 		</div>
 </section>
 
-<form method="post" class="form-signin">
-	<span style="display:inline-block; width: 450px;"></span>
-    <button type=submit class="btn btn-primary btn-user">The above information is correct</button>
+{#
+<form action="{{ url_for('incorporate_new_company.checkout')}}" method="post">
+      <script
+        src="https://checkout.stripe.com/checkout.js"
+        class="stripe-button"
+        data-key="pk_test_51InDYVBV8igYyrszy3m0G9V0GaN4m0gEwDtVgDlhSdk1CAJzRHBB8CMjuvhBZg1L0064PlPslam6wSb4gRK0wBBS00cmUZkpYM"
+        data-description="A Flask Charge"
+        data-amount="4000.0"
+        data-locale="auto">
+      </script>
 </form>
+#}
 
+<a href="#" id="buy_now_btn" class="btn btn-primary">Pay</a>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script language="JavaScript">
+	const button = document.querySelector('#buy_now_btn');
+
+button.addEventListener('click', event => {
+    fetch('/incorporate_new_company/checkout')
+    .then((result) => { return result.json(); })
+    .then((data) => {
+        var stripe = Stripe(data.checkout_public_key);
+        stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as parameter here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+            sessionId: data.checkout_session_id
+        }).then(function (result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+        });
+    })
+});
+</script>
 
 
 {% endblock %}

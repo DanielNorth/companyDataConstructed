@@ -522,7 +522,7 @@ display: block;
   <!-- USER INFORMATION FIELD SET -->
   <fieldset>
     <h2 class="fs-title">Company Information</h2>
-    <h3 class="fs-subtitle">We just need some basic information to begin your scoring</h3>
+    <h3 class="fs-subtitle">We just need some basic information to start your new company</h3>
     <!-- Begin What's Your First Name Field -->
       {{ form.hidden_tag() }}
       {{ wtf.form_field(form.companyName) }}
@@ -543,7 +543,7 @@ display: block;
   <fieldset>
     <h2 class="fs-title">Share Capital Info</h2>
 
-    <h3 class="fs-subtitle">How have you been doing in acquiring donors?</h3>
+    <h3 class="fs-subtitle">We need your company share capital info</h3>
       {{ wtf.form_field(form.shareClass) }}
       {{ wtf.form_field(form.shares_issued) }}
       {{ wtf.form_field(form.currency) }}

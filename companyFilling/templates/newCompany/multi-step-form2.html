@@ -528,14 +528,14 @@ display: block;
 
   <!-- USER INFORMATION FIELD SET -->
   <fieldset>
-    <h2 class="fs-title">Company Information</h2>
-    <h3 class="fs-subtitle">We just need some basic information to begin your scoring</h3>
+    <h2 class="fs-title">Director Information</h2>
+    <h3 class="fs-subtitle">We need some information on your company's director</h3>
     <!-- Begin What's Your First Name Field -->
 
-      <a href="{{ url_for('incorporate_new_company.add_director', company_id=company_id) }}" target="_blank"><button type="button" class="btn btn-success">Add a new Director(Natural Person)</button></a>
+      <a href="{{ url_for('incorporate_new_company.add_director', company_id=company_id, total_shares=total_shares) }}"><button type="button" class="btn btn-success">Add a new Director(Natural Person)</button></a>
       <br>
       <br>
-      <a href="{{ url_for('incorporate_new_company.add_director_corp', company_id=company_id) }}" target="_blank"><button type="button" class="btn btn-success">Add a new Director(Corporate)</button></a>
+      <a href="{{ url_for('incorporate_new_company.add_director_corp', company_id=company_id, total_shares=total_shares) }}"><button type="button" class="btn btn-success">Add a new Director(Corporate)</button></a>
 
       <input type="button" data-page="1" name="next" class="next action-button" value="Next" />
 
@@ -549,7 +549,7 @@ display: block;
     <h3 class="fs-subtitle">Input all the share holder in your company</h3>
     <span style="display:inline-block; width: 40px;"></span>
 
-    <a href="{{ url_for('incorporate_new_company.add_existing_shareholder', company_id=company_id, total_shares=total_shares) }}" target="_blank"><button type="button" class="btn btn-success">   Add a new shareholder</button></a>
+    <a href="{{ url_for('incorporate_new_company.add_existing_shareholder', company_id=company_id, total_shares=total_shares) }}"><button type="button" class="btn btn-success">   Add a new shareholder</button></a>
 
         <!-- End Calc of Total Number of Donors Fields -->
      <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
